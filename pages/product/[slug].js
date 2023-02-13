@@ -23,8 +23,13 @@ function ProductPage({ addtoCart, product, variants }) {
   const [color, setColor] = useState(product.color);
   const [size, setSize] = useState(product.size);
 
-  const sizeSelection = (e) => { };
-
+  const sizeSelection = (newSize) => {
+    setSize(newSize);
+    setColor(product.color);
+  };
+  const colorSelection = (newColor) => {
+    setColor(newColor);
+  };
   return (
     product && (
       <div>
@@ -147,27 +152,20 @@ function ProductPage({ addtoCart, product, variants }) {
                 <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-800 mb-5">
                   <div className="flex">
                     <span className="mr-3">Color: </span>
-                    {Object.keys(variants).includes("black") && Object.keys(variants['black']).includes(size) && (
-                      <button className={`border-2 border-gray-800 rounded-full w-6 h-6 focus:outline-none ${color==='black'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
-                    {Object.keys(variants).includes("gray") && Object.keys(variants['gray']).includes(size) && (
-                      <button className={`border-2 border-gray-800 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none ${color==='gray'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
-                    {Object.keys(variants).includes("yellow") && Object.keys(variants['yellow']).includes(size) && (
-                      <button className={`border-2 border-gray-800 ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none ${color==='yellow'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
-                    {Object.keys(variants).includes("white") && Object.keys(variants['white']).includes(size) && (
-                      <button className={`border-2 border-gray-800 ml-1 bg-white rounded-full w-6 h-6 focus:outline-none ${color==='white'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
-                    {Object.keys(variants).includes("purple") && Object.keys(variants['purple']).includes(size) && (
-                      <button className={`border-2 border-gray-800 ml-1 bg-purple-700 rounded-full w-6 h-6 focus:outline-none ${color==='purple'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
-                    {Object.keys(variants).includes("blue") && Object.keys(variants['blue']).includes(size) && (
-                      <button className={`border-2 border-gray-800 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none ${color==='blue'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
-                    {Object.keys(variants).includes("red") && Object.keys(variants['red']).includes(size) && (
-                      <button className={`border-2 border-gray-800 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none ${color==='red'?"border-gray-300":"border-gray-500"}`}></button>
-                    )}
+                    {Object.keys(variants[size]) &&
+                      Object.keys(variants[size]).map((c) => {
+                        return (
+                          <button
+                            key={c}
+                            className={`border-2 border-gray-800 ml-1 bg-${c}-700 rounded-full w-6 h-6 focus:outline-none ${
+                              color === c
+                                ? "border-gray-300"
+                                : "border-gray-500"
+                            }`}
+                            onClick={() => colorSelection(c)}
+                          ></button>
+                        );
+                      })}
                   </div>
                   <div className="flex ml-6 items-center">
                     <label htmlFor="size" className="mr-3">
@@ -175,34 +173,17 @@ function ProductPage({ addtoCart, product, variants }) {
                     </label>
                     <div className="relative">
                       <select
+                        onChange={(e) => sizeSelection(e.target.value)}
                         id="size"
                         className="rounded border border-gray-700 focus:ring-2 focus:ring-yellow-900 bg-gray-700  appearance-none py-2 focus:outline-none focus:border-yellow-500 text-white pl-3 pr-10"
                       >
-                        {
-                          <option onSelect={sizeSelection} value={"S"}>
-                            S
-                          </option>
-                        }
-                        {
-                          <option onSelect={sizeSelection} value={"M"}>
-                            M
-                          </option>
-                        }
-                        {
-                          <option onSelect={sizeSelection} value={"L"}>
-                            L
-                          </option>
-                        }
-                        {
-                          <option onSelect={sizeSelection} value={"XL"}>
-                            XL
-                          </option>
-                        }
-                        {
-                          <option onSelect={sizeSelection} value={"XXL"}>
-                            XXL
-                          </option>
-                        }
+                        {Object.keys(variants).map((s) => {
+                          return (
+                            <option key={s} value={s}>
+                              {s}
+                            </option>
+                          );
+                        })}
                       </select>
                       <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                         <svg
@@ -227,7 +208,14 @@ function ProductPage({ addtoCart, product, variants }) {
                   <button
                     className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded"
                     onClick={() => {
-                      addtoCart(slug, 1, "XL", 699, "Tshirt", "Red");
+                      addtoCart(
+                        slug,
+                        1,
+                        size,
+                        product.price,
+                        product.title,
+                        color
+                      );
                     }}
                   >
                     Add to Cart
@@ -292,14 +280,14 @@ export async function getServerSideProps(context) {
   let variants = await Product.find({ title: product.title });
   let colorSizeSlug = {}; // {red: {xl: {slug: "Wear-the-code"}}}
   for (let item of variants) {
-    if (Object.keys(colorSizeSlug).includes(item.color)) {
-      colorSizeSlug[item.color][item.size] = { slug: item.slug };
+    if (Object.keys(colorSizeSlug).includes(item.size)) {
+      colorSizeSlug[item.size][item.color] = { slug: item.slug };
     } else {
-      colorSizeSlug[item.color] = {};
-      colorSizeSlug[item.color][item.size] = { slug: item.slug };
+      colorSizeSlug[item.size] = {};
+      colorSizeSlug[item.size][item.color] = { slug: item.slug };
     }
   }
-
+  console.log(colorSizeSlug);
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),

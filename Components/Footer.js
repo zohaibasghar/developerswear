@@ -78,25 +78,7 @@ const Footer = () => {
                 </li>
               </nav>
             </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-400 hover:text-white">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-400 hover:text-white">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-400 hover:text-white">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-400 hover:text-white">Fourth Link</a>
-                </li>
-              </nav>
-            </div>
+            
           </div>
         </div>
         <div className="bg-gray-800 bg-opacity-75">
@@ -104,7 +86,6 @@ const Footer = () => {
             <p className="text-gray-400 text-sm text-center sm:text-left">
               © 2023 DeveloperWear —
               <a
-                href="https://twitter.com/knyttneve"
                 className="text-gray-500 ml-1"
                 rel="noopener noreferrer"
                 target="_blank"

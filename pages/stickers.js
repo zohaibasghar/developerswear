@@ -3,7 +3,7 @@ import Image from "next/image";
 import mongoose from "mongoose";
 import Link from "next/link";
 
-const Tshirts = ({ products }) => {
+const Stickers = ({ products }) => {
   return (
     products && (
       <div>
@@ -87,7 +87,7 @@ export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect("mongodb://127.0.0.1:27017/test");
   }
-  let products = await Product.find({ category: ["sticker", "Sticker"] });
+  let products = await Product.find({ category: ["stickers", "Stickers"] });
   let tshirts = {};
   for (let item of products) {
     if (item.title in tshirts) {
@@ -115,4 +115,4 @@ export async function getServerSideProps(context) {
     props: { products: JSON.parse(JSON.stringify(tshirts)) },
   };
 }
-export default Tshirts;
+export default Stickers;

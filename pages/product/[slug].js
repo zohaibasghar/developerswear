@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import mongoose from "mongoose";
 import Product from "@/models/Product";
 import { BsCheckLg } from "react-icons/bs";
-function ProductPage({ addtoCart, product, variants }) {
+function ProductPage({ addtoCart, product, variants, buyNow }) {
   const router = useRouter();
   const { slug } = router.query;
   const userPin = useRef();
@@ -157,7 +157,7 @@ function ProductPage({ addtoCart, product, variants }) {
                         return (
                           <button
                             key={c}
-                            className={`border-2 border-gray-800 ml-1 bg-${c}-700 rounded-full w-6 h-6 focus:outline-none ${
+                            className={`border-2 border-gray-800 ml-1 ${c=='white'?'bg-white':`bg-${c}-700`} rounded-full w-6 h-6 focus:outline-none ${
                               color === c
                                 ? "border-gray-300"
                                 : "border-gray-500"
@@ -205,6 +205,21 @@ function ProductPage({ addtoCart, product, variants }) {
                   <span className="title-font font-medium text-2xl text-white">
                     ${product.price}
                   </span>
+                  <button
+                    className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded"
+                    onClick={() => {
+                      buyNow(
+                        slug,
+                        1,
+                        size,
+                        product.price,
+                        product.title,
+                        color
+                      );
+                    }}
+                  >
+                    Buy Now
+                  </button>
                   <button
                     className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded"
                     onClick={() => {
@@ -287,7 +302,6 @@ export async function getServerSideProps(context) {
       colorSizeSlug[item.size][item.color] = { slug: item.slug };
     }
   }
-  console.log(colorSizeSlug);
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),

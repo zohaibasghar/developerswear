@@ -1,5 +1,36 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { toast } from "react-toastify";
 const Login = () => {
+  
+  const router = useRouter();
+  const [loginCred, setLoginCred] = useState({ email: "", password: "" });
+  const handleChange = (e) => {
+    setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
+  };
+  const login = async (e) => {
+    e.preventDefault();
+    let res = await fetch("api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginCred),
+    });
+    let data = await res.json();
+    // toast.promise("loggin in!",data)
+    console.log(data);
+    if (data.result) {
+      localStorage.setItem("auth-token", data.token);
+      document.cookie = "auth-Token" + "=" + (data.token || "");
+      setLoginCred({ email: "", password: "" });
+      toast.success(`Happy Shopping ❤`);
+      router.push("/");
+    } else {
+      toast.error("Login failed! kindly enter valid credentials");
+    }
+  };
   return (
     <div>
       <section className="text-gray-400 bg-gray-900 body-font">
@@ -9,38 +40,55 @@ const Login = () => {
               Login
             </h2>
             <small>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Don't have an account? &nbsp;
-              <Link href={'/signup'} className="text-yellow-500 underline text-lg hover:text-yellow-700">Signup</Link>
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              Don't have an account? &nbsp;
+              <Link
+                href={"/signup"}
+                className="text-yellow-500 underline text-lg hover:text-yellow-700"
+              >
+                Signup
+              </Link>
             </small>
-            <div className="relative mb-4">
-              <label htmlFor="email" className="leading-7 text-sm text-gray-400">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="@domain.com"
-                className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label htmlFor="password" className="leading-7 text-sm text-gray-400">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                name="password"
-                className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
+            <form method="POST" onSubmit={login}>
+              <div className="relative mb-4">
+                <label
+                  htmlFor="email"
+                  className="leading-7 text-sm text-gray-400"
+                >
+                  Email
+                </label>
+                <input
+                  onChange={handleChange}
+                  value={loginCred.email}
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="@domain.com"
+                  className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
+              <div className="relative mb-4">
+                <label
+                  htmlFor="password"
+                  className="leading-7 text-sm text-gray-400"
+                >
+                  Password
+                </label>
+                <input
+                  onChange={handleChange}
+                  value={loginCred.password}
+                  type="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  name="password"
+                  className="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
 
-            <button className="text-white font-bold bg-yellow-500 border-0 my-3 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">
-              Login
-            </button>
+              <button className="text-white font-bold bg-yellow-500 border-0 my-3 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">
+                Login
+              </button>
+            </form>
             <Link
               href={"/forgot"}
               className="my-2 text-right text-gray-300 hover:text-yellow-500 underline"

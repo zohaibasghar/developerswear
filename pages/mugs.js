@@ -3,7 +3,7 @@ import Image from "next/image";
 import mongoose from "mongoose";
 import Link from "next/link";
 
-const Tshirts = ({ products }) => {
+const Mugs = ({ products }) => {
   return (
     products && (
       <div>
@@ -115,4 +115,4 @@ export async function getServerSideProps(context) {
     props: { products: JSON.parse(JSON.stringify(tshirts)) },
   };
 }
-export default Tshirts;
+export default Mugs;

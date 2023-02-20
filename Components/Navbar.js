@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "public/logo-no-background.svg";
-
 import {
   AiOutlineShoppingCart,
   AiOutlineCloseCircle,
@@ -121,11 +120,16 @@ const Navbar = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
                 Object.keys(cart).map((item) => {
                   return (
                     <li
-                      className="flex w-[250px] justify-between items-center my-8"
+                      className="flex w-[250px] justify-between items-center my-3 border-b p-1 border-gray-500"
                       key={item}
                     >
                       <BsViewList />
-                      <h3>{cart[item].name}</h3>
+                      <div className="flex flex-col items-center">
+                        <h3>{cart[item].name}</h3>
+                        <span>
+                          {cart[item].variant}/{cart[item].size}
+                        </span>
+                      </div>
                       <div className="quan flex text-center items-center">
                         <AiOutlinePlus
                           className="cursor-pointer hover:bg-yellow-100"

@@ -2,7 +2,7 @@ import User from "@/models/User";
 import connectDB from "@/middleware/db";
 var CryptoJS = require("crypto-js");
 var jwt = require("jsonwebtoken");
-
+const http = require('http')
 async function handler(req, res) {
   if (req.method === "POST") {
     try {
@@ -18,6 +18,7 @@ async function handler(req, res) {
             },
             "key"
           );
+          res.setHeader("Set-Cookie", `auth-Token=${token}`);
           res.status(200).json({ result: true, token });
         } else {
           res.status(404).json({

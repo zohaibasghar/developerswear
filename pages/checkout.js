@@ -8,106 +8,106 @@ const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
       <div className="container mx-auto py-5 ">
         <h2 className="text-center font-bold text-3xl">Checkout</h2>
         <h3 className="my-3 font-bold">1. Delivery Details</h3>
-        <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="user-name"
             >
               Name
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="user-name"
               type="text"
               name="user-name"
               placeholder="Enter your name"
             />
           </div>
-          <div class="w-full md:w-1/2 px-3">
+          <div className="w-full md:w-1/2 px-3">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="user-email"
             >
               E-mail
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="user-email"
               type="email"
               name="email"
               placeholder="@domain.com"
             />
           </div>
-          <div class="w-full px-3 mb-6 md:mb-0">
+          <div className="w-full px-3 mb-6 md:mb-0">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="address"
             >
               Address
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="address"
               type="text"
               name="address"
               placeholder="Enter your Address"
             />
           </div>
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="contact"
             >
               Phone
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="contact"
               type="text"
               name="contact"
               placeholder="Enter your contact #"
             />
           </div>
-          <div class="w-full md:w-1/2 px-3">
+          <div className="w-full md:w-1/2 px-3">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="state"
             >
               State
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="state"
               type="text"
               name="state"
               placeholder="e.g. Punjab"
             />
           </div>
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="city"
             >
               City
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="city"
               type="text"
               name="city"
               placeholder="e.g. Lahore"
             />
           </div>
-          <div class="w-full md:w-1/2 px-3">
+          <div className="w-full md:w-1/2 px-3">
             <label
-              class="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="postCode"
             >
               Postal Code
             </label>
             <input
-              class="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="postCode"
               type="text"
               name="postCode"

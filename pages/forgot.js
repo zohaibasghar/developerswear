@@ -1,4 +1,13 @@
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 const Forgot = () => {
+  const router = useRouter()
+  useEffect(() => {
+    if(localStorage.getItem('auth-token')){
+      router.push('/')
+    }
+  }, [])
   return (
     <div className="flex w-full h-[90vh] bg-gray-900 justify-center items-center">
       <div className=" bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col  mt-10 md:mt-0">

@@ -8,17 +8,28 @@ import {
   AiOutlineMinus,
 } from "react-icons/ai";
 import { BsViewList } from "react-icons/bs";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { MdAccountCircle } from "react-icons/md";
 
-const Navbar = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
+
+const Navbar = ({
+  cart,
+  user,
+  logout,
+  addtoCart,
+  lessinCart,
+  clearCart,
+  subTotal,
+}) => {
   const ref = useRef();
+  const [dropDown, setDropDown] = useState(false)
   const closeCart = () => {
     ref.current.classList.add("translate-x-full");
   };
   const openCart = () => {
     ref.current.classList.remove("translate-x-full");
   };
+  
   return (
     <div>
       <nav className="bg-gray-800">
@@ -84,12 +95,38 @@ const Navbar = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
               </div>
             </div>
           </div>
-          <Link
-            href={"/login"}
-            className="absolute right-20 text-3xl hover:text-blue-700 top-4  hover:bg-yellow-500 p-1 rounded"
-          >
-            <MdAccountCircle />
-          </Link>
+
+          {user.value && (
+            <Link
+              href={""}
+              // onClick={logout}
+              className="absolute right-16 text-3xl  top-4 m-1 cursor-pointer rounded"
+              onMouseEnter={
+                ()=>{setDropDown(true)}
+              }
+              onMouseLeave={()=>{setDropDown(false)}}
+            >
+              <MdAccountCircle/>
+            </Link>
+          )}
+          {dropDown && user.value &&
+            <ul className="absolute right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32 " onMouseEnter={
+              ()=>{setDropDown(true)}
+            }
+            onMouseLeave={()=>{setDropDown(false)}}>
+              <Link href={'/myaccount'}><li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">My Account</li></Link>
+              <Link href={'/orders'}><li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">Orders</li></Link>
+              <Link onClick={logout} href={''}><li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">logout</li></Link>
+            </ul>
+          }
+          {!user.value && (
+            <Link
+              href={"/login"}
+              className="absolute right-20 text-md hover:text-blue-700 top-4  hover:bg-yellow-700 p-1 rounded bg-yellow-500 py-1 px-2"
+            >
+              Login
+            </Link>
+          )}
           <Link
             href={"#"}
             onClick={openCart}

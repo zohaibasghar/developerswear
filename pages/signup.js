@@ -1,7 +1,14 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Signup = () => {
+  const router = useRouter()
+  useEffect(() => {
+    if(localStorage.getItem('auth-token')){
+      router.push('/')
+    }
+  }, [])
   const [user, setUser] = useState({ name: "", email: "", password: "" });
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });

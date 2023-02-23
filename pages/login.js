@@ -1,14 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Login = () => {
-  
   const router = useRouter();
   const [loginCred, setLoginCred] = useState({ email: "", password: "" });
   const handleChange = (e) => {
     setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    if(localStorage.getItem('auth-token')){
+      router.push('/')
+    }
+  }, [])
+  
   const login = async (e) => {
     e.preventDefault();
     let res = await fetch("api/login", {
@@ -19,11 +24,9 @@ const Login = () => {
       body: JSON.stringify(loginCred),
     });
     let data = await res.json();
-    // toast.promise("loggin in!",data)
-    console.log(data);
     if (data.result) {
       localStorage.setItem("auth-token", data.token);
-      document.cookie = "auth-Token" + "=" + (data.token || "");
+      console.log(data);
       setLoginCred({ email: "", password: "" });
       toast.success(`Happy Shopping ❤`);
       router.push("/");
@@ -31,6 +34,7 @@ const Login = () => {
       toast.error("Login failed! kindly enter valid credentials");
     }
   };
+
   return (
     <div>
       <section className="text-gray-400 bg-gray-900 body-font">

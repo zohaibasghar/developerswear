@@ -1,8 +1,46 @@
-import Link from "next/link";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import {MdOutlinePayment} from 'react-icons/md'
+import { MdOutlinePayment } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
-const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
+import { useState } from "react";
+import { useRouter } from "next/router";
+const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
+  const [checkOutCred, setCheckOutCred] = useState({
+    name: "",
+    email: "",
+    address: "",
+    phone: "",
+    state: "Punjab",
+    city: "",
+    pinCode: "",
+    cart: cart,
+    amount: subTotal,
+    orderId: "",
+  });
+  const credChange = (e) => {
+    setCheckOutCred({ ...checkOutCred, [e.target.name]: e.target.value });
+  };
+  const router = useRouter();
+  const payNow = async (e) => {
+    e.preventDefault();
+
+    setCheckOutCred({
+      ...checkOutCred,
+      orderId: JSON.stringify(new Date(Date.now())),
+    });
+    const res = await fetch("/api/pretransaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(checkOutCred),
+    });
+    const jsonData = await res.json();
+    console.log(jsonData);
+    if ((jsonData.success = true)) {
+      // router.push('/order');
+    }
+  };
+
   return (
     <div className="bg-gray-900">
       <div className="container mx-auto py-5 ">
@@ -12,30 +50,34 @@ const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
-              htmlFor="user-name"
+              htmlFor="name"
             >
               Name
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="user-name"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="name"
               type="text"
-              name="user-name"
+              onChange={credChange}
+              value={checkOutCred.name}
+              name="name"
               placeholder="Enter your name"
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
-              htmlFor="user-email"
+              htmlFor="email"
             >
               E-mail
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="user-email"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="email"
               type="email"
               name="email"
+              onChange={credChange}
+              value={checkOutCred.email}
               placeholder="@domain.com"
             />
           </div>
@@ -47,25 +89,29 @@ const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
               Address
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="address"
               type="text"
               name="address"
+              onChange={credChange}
+              value={checkOutCred.address}
               placeholder="Enter your Address"
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
-              htmlFor="contact"
+              htmlFor="phone"
             >
               Phone
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="contact"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              id="phone"
               type="text"
-              name="contact"
+              name="phone"
+              onChange={credChange}
+              value={checkOutCred.phone}
               placeholder="Enter your contact #"
             />
           </div>
@@ -77,10 +123,12 @@ const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
               State
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="state"
               type="text"
+              onChange={credChange}
               name="state"
+              value={checkOutCred.state}
               placeholder="e.g. Punjab"
             />
           </div>
@@ -92,25 +140,29 @@ const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
               City
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="city"
               type="text"
               name="city"
               placeholder="e.g. Lahore"
+              onChange={credChange}
+              value={checkOutCred.city}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
-              htmlFor="postCode"
+              htmlFor="pinCode"
             >
               Postal Code
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-400 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="postCode"
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="pinCode"
               type="text"
-              name="postCode"
+              name="pinCode"
+              onChange={credChange}
+              value={checkOutCred.pinCode}
               placeholder="Enteer your postal code"
             />
           </div>
@@ -158,16 +210,24 @@ const Checkout = ({ cart, addtoCart, lessinCart, clearCart, subTotal }) => {
               </ol>
             </div>
             <div className="bill my-3">Total Bill: ${subTotal}</div>
-            <div className="checkoutBtn flex flex-row">
-              <Link
-                href={"#"}
-                className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-              >
-                <span className="flex items-center">Pay now <MdOutlinePayment className="ml-2"/></span>
-              </Link>
 
-              
-            </div>
+            <button
+              onClick={payNow}
+              className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded checkoutBtn flex flex-row disabled:bg-gray-100 disabled:text-gray-800"
+              disabled={
+                checkOutCred.name.length < 3 ||
+                checkOutCred.email.length < 3 ||
+                checkOutCred.address.length < 3 ||
+                checkOutCred.phone.length < 5 ||
+                checkOutCred.state.length < 2 ||
+                checkOutCred.city.length < 2 ||
+                checkOutCred.pinCode.length < 2
+              }
+            >
+              <span className="flex items-center">
+                Pay now <MdOutlinePayment className="ml-2" />
+              </span>
+            </button>
           </div>
         </section>
       </div>

@@ -3,18 +3,16 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema(
   {
-    userId: { type: String, required: true },
-    products: [
-      {
-        productId: { type: String },
-        quantity: { type: Number, default: 1 },
-      },
-    ],
+    email: { type: String, required: true },
+    orderId: { type: String, required: true },
+    paymentInfo: { type: String, default: "" },
+    products: { type: Object, required: true },
     address: { type: String, required: true },
     amount: { type: String, required: true, default: "Pending" },
+    status: { type: String, default: "Pending" },
   },
-  { timestamps: true,strict:false }
+  { timestamps: true, strict: false }
 );
 
-const Order = mongoose.models.Order|| mongoose.model("Order", orderSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 export default Order;

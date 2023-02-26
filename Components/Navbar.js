@@ -29,21 +29,20 @@ const Navbar = ({
   const openCart = () => {
     ref.current.classList.remove("translate-x-full");
   };
-  
   return (
     <div>
       <nav className="bg-gray-800">
         <div className="flex flex-col md:flex-row md:justify-start justify-center items-center">
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center">
+              <Link href={'/'} className="flex flex-shrink-0 items-center ml-2">
                 <Image
                   src={logo}
                   width={200}
                   height={100}
                   alt="Developer's Wear"
                 />
-              </div>
+              </Link>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <Link

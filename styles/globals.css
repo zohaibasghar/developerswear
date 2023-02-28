@@ -108,3 +108,27 @@ a {
     color-scheme: dark;
   }
 }
+
+
+#b1 {
+  background: url("../public/ubl.jpg") center center / cover;
+}
+#b2 {
+  background: url("../public/meezan.jpg") center center / cover;
+}
+#b3 {
+  background: url("../public/jazzcash.jpg") center center / cover;
+}
+#b4 {
+  background: url("../public/easypaisa.jpg") center center / cover;
+}
+#b5 {
+  background: url("../public/standardchartered.jpg") center center / cover;
+}
+#b6 {
+  background: url("../public/alfalah.jpg") center center / cover;
+}
+#b7 {
+  background: url("../public/sadapay.jpg") center center / cover;
+}
+

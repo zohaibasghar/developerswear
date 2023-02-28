@@ -1,31 +1,40 @@
+/* eslint-disable @next/next/no-img-element */
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
+import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import styles from "../styles/bank.module.css";
+
 const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
+  let [isOpen, setIsOpen] = useState(false);
+  const [bank, setBank] = useState(null);
   const [checkOutCred, setCheckOutCred] = useState({
     name: "",
     email: "",
     address: "",
     phone: "",
-    state: "Punjab",
+    state: "",
     city: "",
     pinCode: "",
     cart: cart,
     amount: subTotal,
-    orderId: "",
+    orderId: JSON.stringify(Date.now()),
+    paymentInfo:''
   });
+  console.log(checkOutCred.paymentInfo)
   const credChange = (e) => {
     setCheckOutCred({ ...checkOutCred, [e.target.name]: e.target.value });
   };
   const router = useRouter();
+  
   const payNow = async (e) => {
     e.preventDefault();
-
     setCheckOutCred({
       ...checkOutCred,
-      orderId: JSON.stringify(new Date(Date.now())),
+      orderId: JSON.stringify(Date.now()),
+      paymentInfo:bank
     });
     const res = await fetch("/api/pretransaction", {
       method: "POST",
@@ -36,8 +45,9 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
     });
     const jsonData = await res.json();
     console.log(jsonData);
-    if ((jsonData.success = true)) {
-      // router.push('/order');
+    // setCheckOutSuccess(true)
+    if (jsonData.success === true) {
+      // router.push("/order");
     }
   };
 
@@ -212,9 +222,12 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
             <div className="bill my-3">Total Bill: ${subTotal}</div>
 
             <button
-              onClick={payNow}
+              onClick={() => setIsOpen(true)}
+              data-modal-target="defaultModal"
+              data-modal-toggle="defaultModal"
               className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded checkoutBtn flex flex-row disabled:bg-gray-100 disabled:text-gray-800"
               disabled={
+                Object.keys(cart).length == 0 ||
                 checkOutCred.name.length < 3 ||
                 checkOutCred.email.length < 3 ||
                 checkOutCred.address.length < 3 ||
@@ -231,6 +244,96 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
           </div>
         </section>
       </div>
+
+      {/* Payment modal */}
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
+
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <Dialog.Panel className="w-full max-w-sm rounded bg-gray-800 p-4">
+            <Dialog.Title className="font-semibold text-xl py-1">
+              Payment Info
+            </Dialog.Title>
+            <hr />
+            <Dialog.Description className={`py-1`}>
+              Select your desired payment gateway!
+            </Dialog.Description>
+
+            <div className="py-1 bankList flex justify-around my-2">
+              <span
+                onClick={() => {
+                  setBank("UBL");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b1"
+              ></span>
+              <span
+                onClick={() => {
+                  setBank("Meezan Bank");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b2"
+              ></span>
+              <span
+                onClick={() => {
+                  setBank("Jazzcash");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b3"
+              ></span>
+              <span
+                onClick={() => {
+                  setBank("Easypaisa");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b4"
+              ></span>
+              <span
+                onClick={() => {
+                  setBank("Standard Chartered Bank");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b5"
+              ></span>
+              <span
+                onClick={() => {
+                  setBank("Bank Alfalah");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b6"
+              ></span>
+              <span
+                onClick={() => {
+                  setBank("SadaPay");
+                }}
+                className={`${styles.bank} rounded mr-1`}
+                id="b7"
+              ></span>
+            </div>
+            {bank && <div>Selected Bank : {bank}</div>}
+
+            <div className="flex items-center justify-end gap-3 mt-4">
+              <button
+                disabled={!bank}
+                onClick={payNow}
+                className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded checkoutBtn flex flex-row disabled:bg-gray-100 border border-gray-900 disabled:text-gray-800"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={() => {setIsOpen(false);setBank(null)}}
+                className="bg-transparent hover:bg-gray-900 font-semibold text-white py-2 px-4 border border-white hover:border-transparent rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
     </div>
   );
 };

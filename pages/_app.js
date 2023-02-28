@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }) {
       setUser({ value: token });
       setKey(Math.random());
     }
-  }, [router.query]);
+  }, [router.events]);
 
   //cart saving function
   const saveCart = (saveCart) => {

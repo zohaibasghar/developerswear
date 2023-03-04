@@ -1,14 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
 import { Dialog } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/bank.module.css";
-
-const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
+import { toast } from "react-toastify";
+const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
   let [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const [bank, setBank] = useState(null);
   const [checkOutCred, setCheckOutCred] = useState({
     name: "",
@@ -21,21 +21,56 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
     cart: cart,
     amount: subTotal,
     orderId: JSON.stringify(Date.now()),
-    paymentInfo:''
+    paymentInfo: "",
   });
-  console.log(checkOutCred.paymentInfo)
-  const credChange = (e) => {
-    setCheckOutCred({ ...checkOutCred, [e.target.name]: e.target.value });
-  };
-  const router = useRouter();
-  
-  const payNow = async (e) => {
-    e.preventDefault();
+  console.log(checkOutCred.amount, subTotal);
+  const [pinCodes, setPinCodes] = useState({});
+  useEffect(() => {
     setCheckOutCred({
       ...checkOutCred,
-      orderId: JSON.stringify(Date.now()),
-      paymentInfo:bank
+      cart: JSON.parse(localStorage.getItem("cart")),
+      amount: subTotal,
     });
+    async function pinReq() {
+      let pinReq = await fetch("/api/pincode", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let pincodes = await pinReq.json();
+
+      setPinCodes(pincodes);
+    }
+    pinReq();
+  }, [subTotal]);
+
+  const credChange = async (e) => {
+    const { name, value } = e.target;
+    let newState = { ...checkOutCred, [name]: value };
+
+    if (name === "pinCode" && value.length === 6) {
+      const [city, state] = pinCodes[value] || [];
+      newState = { ...newState, city: city || "", state: state || "" };
+    } else if (name === "pinCode") {
+      newState = { ...newState, city: "", state: "" };
+    }
+
+    setCheckOutCred(newState);
+  };
+
+  const bankChange = async (e) => {
+    if (e.target.tagName === "SPAN") {
+      setCheckOutCred({
+        ...checkOutCred,
+        paymentInfo: e.target.textContent,
+      });
+      setBank(e.target.textContent);
+    }
+  };
+  const payNow = async (e) => {
+    e.preventDefault();
+    setIsOpen(false);
     const res = await fetch("/api/pretransaction", {
       method: "POST",
       headers: {
@@ -44,12 +79,53 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
       body: JSON.stringify(checkOutCred),
     });
     const jsonData = await res.json();
-    console.log(jsonData);
-    // setCheckOutSuccess(true)
+
     if (jsonData.success === true) {
-      // router.push("/order");
+      // router.push(`/order?id=${checkOutCred.orderId}`);
+      // clearCart();
+      toast.success("Order placed successfully!");
+      let postTrx = await fetch("/api/posttransaction", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: checkOutCred.orderId }),
+      });
+    } else if (jsonData.success === false) {
+      toast.error(jsonData.error);
+      // clearCart()
     }
   };
+  const banks = [
+    {
+      bank: "b1",
+      bname: "UBL",
+    },
+    {
+      bank: "b2",
+      bname: "Meezan Bank",
+    },
+    {
+      bank: "b3",
+      bname: "JazzCash",
+    },
+    {
+      bank: "b4",
+      bname: "EasyPaisa",
+    },
+    {
+      bank: "b5",
+      bname: "Standard Chartered",
+    },
+    {
+      bank: "b6",
+      bname: "Bank Alfalah",
+    },
+    {
+      bank: "b7",
+      bname: "SadaPay",
+    },
+  ];
 
   return (
     <div className="bg-gray-900">
@@ -128,6 +204,23 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
+              htmlFor="pinCode"
+            >
+              Postal Code
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="pinCode"
+              type="text"
+              name="pinCode"
+              onChange={credChange}
+              value={checkOutCred.pinCode}
+              placeholder="Enter your postal code"
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label
+              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
               htmlFor="state"
             >
               State
@@ -159,23 +252,6 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
               value={checkOutCred.city}
             />
           </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block tracking-wide text-gray-400 text-xs font-bold mb-2"
-              htmlFor="pinCode"
-            >
-              Postal Code
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="pinCode"
-              type="text"
-              name="pinCode"
-              onChange={credChange}
-              value={checkOutCred.pinCode}
-              placeholder="Enteer your postal code"
-            />
-          </div>
         </div>
       </div>
       <div className="reviewCart">
@@ -184,11 +260,11 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
             <div>
               <h3 className="my-3 font-bold">2. Review your cart & Pay</h3>
 
-              <ol>
+              <div>
                 {Object.keys(cart).length > 0 ? (
                   Object.keys(cart).map((item) => {
                     return (
-                      <li
+                      <span
                         className="flex w-[250px] justify-between items-center my-8"
                         key={item}
                       >
@@ -201,7 +277,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
                               addtoCart(item, 1, "XL", 699, "Tshirt", "Red");
                             }}
                           />
-                          <span className="mx-1">{cart[item].qty}</span>
+                          <li className="mx-1 list-none">{cart[item].qty}</li>
                           <AiOutlineMinus
                             className="cursor-pointer hover:bg-yellow-100"
                             onClick={() => {
@@ -209,7 +285,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
                             }}
                           />
                         </div>
-                      </li>
+                      </span>
                     );
                   })
                 ) : (
@@ -217,12 +293,14 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
                     Your cart is empty!
                   </div>
                 )}
-              </ol>
+              </div>
             </div>
             <div className="bill my-3">Total Bill: ${subTotal}</div>
 
             <button
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setIsOpen(true);
+              }}
               data-modal-target="defaultModal"
               data-modal-toggle="defaultModal"
               className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded checkoutBtn flex flex-row disabled:bg-gray-100 disabled:text-gray-800"
@@ -254,7 +332,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
         <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
 
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Dialog.Panel className="w-full max-w-sm rounded bg-gray-800 p-4">
+          <Dialog.Panel className="w-full max-w-md rounded bg-gray-800 p-4">
             <Dialog.Title className="font-semibold text-xl py-1">
               Payment Info
             </Dialog.Title>
@@ -263,56 +341,21 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
               Select your desired payment gateway!
             </Dialog.Description>
 
-            <div className="py-1 bankList flex justify-around my-2">
-              <span
-                onClick={() => {
-                  setBank("UBL");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b1"
-              ></span>
-              <span
-                onClick={() => {
-                  setBank("Meezan Bank");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b2"
-              ></span>
-              <span
-                onClick={() => {
-                  setBank("Jazzcash");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b3"
-              ></span>
-              <span
-                onClick={() => {
-                  setBank("Easypaisa");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b4"
-              ></span>
-              <span
-                onClick={() => {
-                  setBank("Standard Chartered Bank");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b5"
-              ></span>
-              <span
-                onClick={() => {
-                  setBank("Bank Alfalah");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b6"
-              ></span>
-              <span
-                onClick={() => {
-                  setBank("SadaPay");
-                }}
-                className={`${styles.bank} rounded mr-1`}
-                id="b7"
-              ></span>
+            <div
+              className="py-1 bankList flex justify-around gap-1 my-2"
+              onClick={bankChange}
+            >
+              {banks.map((b) => {
+                return (
+                  <span
+                    key={b.bank}
+                    className={`${styles.bank} rounded text-transparent`}
+                    id={b.bank}
+                  >
+                    {b.bname}
+                  </span>
+                );
+              })}
             </div>
             {bank && <div>Selected Bank : {bank}</div>}
 
@@ -325,7 +368,10 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal }) => {
                 Confirm
               </button>
               <button
-                onClick={() => {setIsOpen(false);setBank(null)}}
+                onClick={() => {
+                  setIsOpen(false);
+                  setBank(null);
+                }}
                 className="bg-transparent hover:bg-gray-900 font-semibold text-white py-2 px-4 border border-white hover:border-transparent rounded"
               >
                 Cancel

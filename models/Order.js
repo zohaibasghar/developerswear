@@ -5,10 +5,10 @@ const orderSchema = new Schema(
   {
     email: { type: String, required: true },
     orderId: { type: String, required: true },
-    paymentInfo: { type: String, default: "" },
+    paymentInfo: { type: String, default: "COD" },
     products: { type: Object, required: true },
     address: { type: String, required: true },
-    amount: { type: String, required: true, default: "Pending" },
+    amount: { type: Number, required: true },
     status: { type: String, default: "Pending" },
   },
   { timestamps: true, strict: false }

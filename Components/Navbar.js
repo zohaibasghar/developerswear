@@ -10,6 +10,7 @@ import {
 import { BsViewList } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { MdAccountCircle } from "react-icons/md";
+import { toast } from "react-toastify";
 
 
 const Navbar = ({
@@ -202,7 +203,7 @@ const Navbar = ({
 
             <button
               className="bg-transparent hover:bg-gray-900 text-gray-900 font-semibold hover:text-white py-2 px-4 border border-gray-900 hover:border-transparent rounded"
-              onClick={clearCart}
+              onClick={()=>{ toast.info(`Cart cleared!`);;clearCart()}}
             >
               Clear Cart
             </button>

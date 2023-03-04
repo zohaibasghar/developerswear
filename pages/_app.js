@@ -57,19 +57,18 @@ export default function App({ Component, pageProps }) {
     let newCart = { ...cart };
     if (!(itemCode in cart)) {
       newCart[itemCode] = { name, qty: 1, size, price, variant };
+      toast.success(`Item added successfully!`);
     } else {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
     }
     setCart(newCart);
     saveCart(newCart);
-    toast.success(`Item added successfully!`);
   };
 
   // delete all items in cart
   const clearCart = () => {
     setCart({});
     saveCart({});
-    toast.info(`Cart cleared!`);
   };
 
   // decrease the quantity in the cart
@@ -80,15 +79,16 @@ export default function App({ Component, pageProps }) {
     }
     if (cart[itemCode].qty <= 0) {
       delete cart[itemCode];
+      toast.info(`Item removed from cart.`);
     }
     setCart(newCart);
     saveCart(newCart);
-    toast.info(`Item removed from cart.`);
   };
 
   // buy item right now and clear the remaining items from the cart
   const buyNow = (itemCode, qty, size, price, name, variant) => {
-    let newCart = { [itemCode]: { qty, size, price, name, variant } };
+    let newCart={}
+    newCart[itemCode] = { qty, size, price, name, variant }
     setCart(newCart);
     saveCart(newCart);
     router.push("/checkout");

@@ -9,14 +9,14 @@ export default async function handler(req, res) {
     for (let item in cart) {
       let product = await Product.findOne({ slug: item, size:cart[item].size });
       console.log(product)
-      await Product.findOneAndUpdate(
-        { slug: item,size:cart[item].size },
-        {
-          $inc: {
-            availableQty: -cart[item].qty,
-          },
-        }
-      );
+    //   await Product.findOneAndUpdate(
+    //     { slug: item,size:cart[item].size },
+    //     {
+    //       $inc: {
+    //         availableQty: -cart[item].qty,
+    //       },
+    //     }
+    //   );
     }
     res.status(200).json({ success: true, error: "Stock updated!" });
   } else {

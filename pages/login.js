@@ -9,11 +9,11 @@ const Login = () => {
     setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    if(localStorage.getItem('auth-token')){
-      router.push('/')
+    if (localStorage.getItem("auth-token")) {
+      router.push("/");
     }
-  }, [])
-  
+  }, []);
+
   const login = async (e) => {
     e.preventDefault();
     let res = await fetch("api/login", {
@@ -26,7 +26,6 @@ const Login = () => {
     let data = await res.json();
     if (data.result) {
       localStorage.setItem("auth-token", data.token);
-      console.log(data);
       setLoginCred({ email: "", password: "" });
       toast.success(`Happy Shopping ❤`);
       router.push("/");

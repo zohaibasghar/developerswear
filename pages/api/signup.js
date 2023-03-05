@@ -1,4 +1,5 @@
 import User from "@/models/User";
+import connectDB from "@/middleware/db";
 var CryptoJS = require("crypto-js");
 async function handler(req, res) {
   if (req.method === "POST") {

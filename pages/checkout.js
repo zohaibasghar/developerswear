@@ -9,7 +9,9 @@ import { toast } from "react-toastify";
 const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
   let [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const [bank, setBank] = useState(null);
+
+  const [token, setToken] = useState("");
+  const [bank, setBank] = useState("");
   const [checkOutCred, setCheckOutCred] = useState({
     name: "",
     email: "",
@@ -23,14 +25,33 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
     orderId: JSON.stringify(Date.now()),
     paymentInfo: "",
   });
-  console.log(checkOutCred.amount, subTotal);
+
   const [pinCodes, setPinCodes] = useState({});
-  useEffect(() => {
-    setCheckOutCred({
-      ...checkOutCred,
-      cart: JSON.parse(localStorage.getItem("cart")),
-      amount: subTotal,
+  let emailFetch = async (token) => {
+    let fet = await fetch("/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
     });
+    let data = await fet.json();
+    const newstate = {
+      ...checkOutCred,
+      name: data.name,
+      email: data.email,
+    };
+    setCheckOutCred(newstate);
+  };
+  useEffect(() => {
+    setToken(localStorage.getItem("auth-token"));
+    emailFetch(token);
+    setCheckOutCred((prevState) => ({
+      ...prevState,
+      amount: subTotal,
+    }));
+    console.log(checkOutCred.amount);
+    console.log(subTotal);
     async function pinReq() {
       let pinReq = await fetch("/api/pincode", {
         method: "GET",
@@ -43,7 +64,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
       setPinCodes(pincodes);
     }
     pinReq();
-  }, [subTotal]);
+  },[subTotal,cart.qty]);
 
   const credChange = async (e) => {
     const { name, value } = e.target;
@@ -144,6 +165,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="name"
               type="text"
+              readOnly={token}
               onChange={credChange}
               value={checkOutCred.name}
               name="name"
@@ -164,7 +186,8 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
               name="email"
               onChange={credChange}
               value={checkOutCred.email}
-              placeholder="@domain.com"
+              readOnly={token}
+              placeholder="ali@domain.com"
             />
           </div>
           <div className="w-full px-3 mb-6 md:mb-0">
@@ -305,14 +328,14 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
               data-modal-toggle="defaultModal"
               className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded checkoutBtn flex flex-row disabled:bg-gray-100 disabled:text-gray-800"
               disabled={
-                Object.keys(cart).length == 0 ||
-                checkOutCred.name.length < 3 ||
-                checkOutCred.email.length < 3 ||
-                checkOutCred.address.length < 3 ||
-                checkOutCred.phone.length < 5 ||
-                checkOutCred.state.length < 2 ||
-                checkOutCred.city.length < 2 ||
-                checkOutCred.pinCode.length < 2
+                Object.keys(cart).length == 0
+                // checkOutCred.name.length < 3 ||
+                // checkOutCred.email.length < 3 ||
+                // checkOutCred.address.length < 3 ||
+                // checkOutCred.phone.length < 5 ||
+                // checkOutCred.state.length < 2 ||
+                // checkOutCred.city.length < 2 ||
+                // checkOutCred.pinCode.length < 2
               }
             >
               <span className="flex items-center">

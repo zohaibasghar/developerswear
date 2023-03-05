@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({ value: null });
   const [progress, setProgress] = useState(0);
   useEffect(() => {
+    console.log(user)
     try {
       router.events.on("routeChangeStart", () => {
         setProgress(30);
@@ -39,7 +40,10 @@ export default function App({ Component, pageProps }) {
       setUser({ value: token });
       setKey(Math.random());
     }
-  }, [router.events]);
+  }, [router.query]);
+
+
+
 
   //cart saving function
   const saveCart = (saveCart) => {
@@ -87,8 +91,8 @@ export default function App({ Component, pageProps }) {
 
   // buy item right now and clear the remaining items from the cart
   const buyNow = (itemCode, qty, size, price, name, variant) => {
-    let newCart={}
-    newCart[itemCode] = { qty, size, price, name, variant }
+    let newCart = {};
+    newCart[itemCode] = { qty, size, price, name, variant };
     setCart(newCart);
     saveCart(newCart);
     router.push("/checkout");

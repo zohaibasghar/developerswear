@@ -8,10 +8,9 @@ import {
   AiOutlineMinus,
 } from "react-icons/ai";
 import { BsViewList } from "react-icons/bs";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdAccountCircle } from "react-icons/md";
 import { toast } from "react-toastify";
-
 
 const Navbar = ({
   cart,
@@ -23,20 +22,21 @@ const Navbar = ({
   subTotal,
 }) => {
   const ref = useRef();
-  const [dropDown, setDropDown] = useState(false)
+  const [dropDown, setDropDown] = useState(false);
   const closeCart = () => {
     ref.current.classList.add("translate-x-full");
   };
   const openCart = () => {
     ref.current.classList.remove("translate-x-full");
   };
+
   return (
     <div>
       <nav className="bg-gray-800">
         <div className="flex flex-col md:flex-row md:justify-start justify-center items-center">
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <Link href={'/'} className="flex flex-shrink-0 items-center ml-2">
+              <Link href={"/"} className="flex flex-shrink-0 items-center ml-2">
                 <Image
                   src={logo}
                   width={200}
@@ -100,25 +100,45 @@ const Navbar = ({
             <Link
               href={""}
               // onClick={logout}
-              className="absolute right-16 text-3xl  top-4 m-1 cursor-pointer rounded"
-              onMouseEnter={
-                ()=>{setDropDown(true)}
-              }
-              onMouseLeave={()=>{setDropDown(false)}}
+              className="absolute right-16 text-3xl  top-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
+              onMouseEnter={() => {
+                setDropDown(true);
+              }}
+              onMouseLeave={() => {
+                setDropDown(false);
+              }}
             >
-              <MdAccountCircle/>
+              <MdAccountCircle />
             </Link>
           )}
-          {dropDown && user.value &&
-            <ul className="absolute right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32 " onMouseEnter={
-              ()=>{setDropDown(true)}
-            }
-            onMouseLeave={()=>{setDropDown(false)}}>
-              <Link href={'/myaccount'}><li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">My Account</li></Link>
-              <Link href={'/orders'}><li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">Orders</li></Link>
-              <Link onClick={logout} href={''}><li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">logout</li></Link>
+  
+          {dropDown===true && user.value && (
+            <ul
+              className="absolute right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32 "
+              onMouseEnter={() => {
+                setDropDown(true);
+              }}
+              onMouseLeave={() => {
+                setDropDown(false);
+              }}
+            >
+              <Link href={"/myaccount"}>
+                <li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">
+                  My Account
+                </li>
+              </Link>
+              <Link href={"/orders"}>
+                <li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">
+                  Orders
+                </li>
+              </Link>
+              <Link onClick={()=>{logout();setDropDown(false)}} href={""}>
+                <li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">
+                  logout
+                </li>
+              </Link>
             </ul>
-          }
+          )}
           {!user.value && (
             <Link
               href={"/login"}
@@ -203,7 +223,10 @@ const Navbar = ({
 
             <button
               className="bg-transparent hover:bg-gray-900 text-gray-900 font-semibold hover:text-white py-2 px-4 border border-gray-900 hover:border-transparent rounded"
-              onClick={()=>{ toast.info(`Cart cleared!`);;clearCart()}}
+              onClick={() => {
+                toast.info(`Cart cleared!`);
+                clearCart();
+              }}
             >
               Clear Cart
             </button>

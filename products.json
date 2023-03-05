@@ -1,0 +1,385 @@
+[{
+  "_id": {
+    "$oid": "63e8b9f036970ae6bcf3f2ec"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-black",
+  "desc": "Wear our amazing shirts",
+  "img": "https://ih1.redbubble.net/image.830561167.2848/ssrco,classic_tee,womens,101010:01c5ca27c6,front_alt,square_product,600x600.u1.jpg",
+  "category": "shirt",
+  "size": "S",
+  "color": "purple",
+  "price": 499,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196336624"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1677923110049"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63e8ba2736970ae6bcf3f2ef"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-red",
+  "desc": "Wear our amazing shirts",
+  "img": "https://m.media-amazon.com/images/I/B1DnWZEQ8ES._CLa%7C2140%2C2000%7C61c4gPjJPML.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SL1500_.png",
+  "category": "shirt",
+  "size": "M",
+  "color": "red",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196391980"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676196391980"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63e8ba6836970ae6bcf3f2f1"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-blue",
+  "desc": "Wear our amazing shirts",
+  "img": "https://m.media-amazon.com/images/I/61G3K8QPAuL._UX569_.jpg",
+  "category": "shirt",
+  "size": "L",
+  "color": "blue",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196456148"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676196456148"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63e8bab436970ae6bcf3f2f3"
+  },
+  "title": "Programmers Mug",
+  "slug": "drink-coffee-white",
+  "desc": "drink coffee like a boss",
+  "img": "https://i.etsystatic.com/16068233/r/il/1408f7/1894632441/il_fullxfull.1894632441_n7yr.jpg",
+  "category": "Mug",
+  "size": "L",
+  "color": "white",
+  "price": 499,
+  "availableQty": 2,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196532836"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676196532836"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63e8badd36970ae6bcf3f2f5"
+  },
+  "title": "Programmers Mug",
+  "slug": "drink-coffee-black",
+  "desc": "drink coffee like a boss",
+  "img": "https://i.pinimg.com/736x/da/30/05/da300559ddd9d349dc5868109a2b9425.jpg",
+  "category": "Mug",
+  "size": "L",
+  "color": "black",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196573160"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676196573160"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63e8bb1236970ae6bcf3f2f7"
+  },
+  "title": "Programmers Mug",
+  "slug": "drink-coffee-yellow",
+  "desc": "drink coffee like a boss",
+  "img": "https://techmark.pk/wp-content/uploads/2021/06/js-mug-11.webp",
+  "category": "Mug",
+  "size": "L",
+  "color": "yellow",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196626806"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676196626806"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63e8bb7036970ae6bcf3f2f9"
+  },
+  "title": "Eat sleep code Repeat",
+  "slug": "wear-the-code-black",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "L",
+  "color": "yellow",
+  "price": 999,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676196720752"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676196720752"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ea17dd36970ae6bcf3f3ac"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-red-s",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "S",
+  "color": "red",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676285917735"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676285917735"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ea67c12cfefe6d0897ae3a"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-blue-m",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "M",
+  "color": "blue",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676306369191"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676306369191"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ea67d12cfefe6d0897ae3c"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-gray-l",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "L",
+  "color": "gray",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676306385983"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676306385983"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ea67f02cfefe6d0897ae40"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-yellow-l",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "L",
+  "color": "yellow",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676306416707"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676306416707"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ea68542cfefe6d0897ae44"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-yellow-xl",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "XL",
+  "color": "yellow",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676306516150"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676306516150"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ea68672cfefe6d0897ae46"
+  },
+  "title": "Tshirt",
+  "slug": "wear-the-code-tshirt-blue-xxl",
+  "desc": "Wear the code and code",
+  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
+  "category": "Shirt",
+  "size": "XXL",
+  "color": "blue",
+  "price": 499,
+  "availableQty": 32,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676306535764"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676306535764"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ed10b9c552e41ebe0fb815"
+  },
+  "title": "Coders Hoodie",
+  "slug": "wear-the-code-hoodie",
+  "desc": "wear our hoodie and code",
+  "img": "https://merchshop.in/wp-content/uploads/2019/06/rule-of-programming-black.jpg",
+  "category": "hoodies",
+  "size": "L",
+  "color": "black",
+  "price": 1499,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676480697603"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1677922578026"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ed10f0c552e41ebe0fb819"
+  },
+  "title": "Coders Hoodie",
+  "slug": "wear-the-code-hoodie-white",
+  "desc": "wear our hoodie and code",
+  "img": "https://ih1.redbubble.net/image.4456778124.2018/ssrco,mhoodie,mens,fafafa:ca443f4786,front,square_product,x600-bg,f8f8f8.1.jpg",
+  "category": "hoodies",
+  "size": "L",
+  "color": "white",
+  "price": 1499,
+  "availableQty": 2,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676480752056"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1676480752056"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63ed1238c552e41ebe0fb823"
+  },
+  "title": "Coders stickers",
+  "slug": "wear-the-code-stickers",
+  "desc": "inspire by stickers and code",
+  "img": "https://i.pinimg.com/736x/3f/33/e3/3f33e30decc2f2878eecad68e32d6c66.jpg",
+  "category": "stickers",
+  "size": "M",
+  "color": "white",
+  "price": 299,
+  "availableQty": 9,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1676481080936"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1677923397395"
+    }
+  },
+  "__v": 0
+}]

@@ -3,19 +3,19 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Signup = () => {
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
-    if(localStorage.getItem('auth-token')){
-      router.push('/')
+    if (localStorage.getItem("auth-token")) {
+      router.push("/");
     }
-  }, [])
+  }, []);
   const [user, setUser] = useState({ name: "", email: "", password: "" });
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(user));
+
     let res = await fetch("/api/signup", {
       method: "POST",
       headers: {
@@ -26,6 +26,7 @@ const Signup = () => {
     let data = await res.json();
     if (data.result === "success") {
       setUser({ name: "", email: "", password: "" });
+      router.push("/");
       toast.success(`${user.name}!  Welcome on board. `);
     } else {
       toast.error(`Kindly enter valid credentials!`);

@@ -5,18 +5,18 @@ export default async function handler(req, res) {
   if (req.method === "PUT") {
     let order = await Order.findOne({ orderId: req.body.id });
     let cart = order.products;
-    
+
     for (let item in cart) {
-      let product = await Product.findOne({ slug: item, size:cart[item].size });
-      console.log(product)
-    //   await Product.findOneAndUpdate(
-    //     { slug: item,size:cart[item].size },
-    //     {
-    //       $inc: {
-    //         availableQty: -cart[item].qty,
-    //       },
-    //     }
-    //   );
+      // let product = await Product.findOne({ slug: item, size:cart[item].size });
+      // console.log(product)
+      //   await Product.findOneAndUpdate(
+      //     { slug: item,size:cart[item].size },
+      //     {
+      //       $inc: {
+      //         availableQty: -cart[item].qty,
+      //       },
+      //     }
+      //   );
     }
     res.status(200).json({ success: true, error: "Stock updated!" });
   } else {

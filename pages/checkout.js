@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
   let [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-
   const [token, setToken] = useState("");
   const [bank, setBank] = useState("");
   const [checkOutCred, setCheckOutCred] = useState({
@@ -20,38 +19,31 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
     state: "",
     city: "",
     pinCode: "",
-    cart: cart,
-    amount: subTotal,
     orderId: JSON.stringify(Date.now()),
     paymentInfo: "",
   });
 
   const [pinCodes, setPinCodes] = useState({});
-  let emailFetch = async (token) => {
-    let fet = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token }),
-    });
-    let data = await fet.json();
-    const newstate = {
-      ...checkOutCred,
-      name: data.name,
-      email: data.email,
-    };
-    setCheckOutCred(newstate);
-  };
+
   useEffect(() => {
+    let emailFetch = async (token) => {
+      let fet = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
+      let data = await fet.json();
+      const newstate = {
+        ...checkOutCred,
+        name: data.decoded.name,
+        email: data.decoded.email,
+      };
+      setCheckOutCred(newstate);
+    };
+    emailFetch(localStorage.getItem("auth-token"));
     setToken(localStorage.getItem("auth-token"));
-    emailFetch(token);
-    setCheckOutCred((prevState) => ({
-      ...prevState,
-      amount: subTotal,
-    }));
-    console.log(checkOutCred.amount);
-    console.log(subTotal);
     async function pinReq() {
       let pinReq = await fetch("/api/pincode", {
         method: "GET",
@@ -60,23 +52,19 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
         },
       });
       let pincodes = await pinReq.json();
-
       setPinCodes(pincodes);
     }
     pinReq();
-  },[subTotal,cart.qty]);
-
+  }, []);
   const credChange = async (e) => {
     const { name, value } = e.target;
     let newState = { ...checkOutCred, [name]: value };
-
     if (name === "pinCode" && value.length === 6) {
       const [city, state] = pinCodes[value] || [];
       newState = { ...newState, city: city || "", state: state || "" };
     } else if (name === "pinCode") {
       newState = { ...newState, city: "", state: "" };
     }
-
     setCheckOutCred(newState);
   };
 
@@ -92,29 +80,32 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
   const payNow = async (e) => {
     e.preventDefault();
     setIsOpen(false);
+    setCheckOutCred({
+      ...checkOutCred,
+    });
     const res = await fetch("/api/pretransaction", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(checkOutCred),
+      body: JSON.stringify({ checkOutCred, subTotal, cart }),
     });
     const jsonData = await res.json();
 
     if (jsonData.success === true) {
-      // router.push(`/order?id=${checkOutCred.orderId}`);
-      // clearCart();
+      router.push(`/order?id=${checkOutCred.orderId}`);
+      clearCart();
       toast.success("Order placed successfully!");
-      let postTrx = await fetch("/api/posttransaction", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: checkOutCred.orderId }),
-      });
+      // let postTrx = await fetch("/api/posttransaction", {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ id: checkOutCred.orderId }),
+      // });
     } else if (jsonData.success === false) {
       toast.error(jsonData.error);
-      // clearCart()
+      clearCart()
     }
   };
   const banks = [
@@ -328,14 +319,14 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
               data-modal-toggle="defaultModal"
               className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded checkoutBtn flex flex-row disabled:bg-gray-100 disabled:text-gray-800"
               disabled={
-                Object.keys(cart).length == 0
-                // checkOutCred.name.length < 3 ||
-                // checkOutCred.email.length < 3 ||
-                // checkOutCred.address.length < 3 ||
-                // checkOutCred.phone.length < 5 ||
-                // checkOutCred.state.length < 2 ||
-                // checkOutCred.city.length < 2 ||
-                // checkOutCred.pinCode.length < 2
+                Object.keys(cart).length == 0 ||
+                checkOutCred.name.length < 3 ||
+                checkOutCred.email.length < 3 ||
+                checkOutCred.address.length < 3 ||
+                checkOutCred.phone.length < 5 ||
+                checkOutCred.state.length < 2 ||
+                checkOutCred.city.length < 2 ||
+                checkOutCred.pinCode.length < 2
               }
             >
               <span className="flex items-center">

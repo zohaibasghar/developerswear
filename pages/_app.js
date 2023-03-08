@@ -12,10 +12,10 @@ export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
   const [subTotal, setSubTotal] = useState(0);
   const [key, setKey] = useState(0);
+
   const [user, setUser] = useState({ value: null });
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    console.log(user)
     try {
       router.events.on("routeChangeStart", () => {
         setProgress(30);
@@ -41,9 +41,6 @@ export default function App({ Component, pageProps }) {
       setKey(Math.random());
     }
   }, [router.query]);
-
-
-
 
   //cart saving function
   const saveCart = (saveCart) => {

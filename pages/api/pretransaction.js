@@ -9,7 +9,7 @@ async function handler(req, res) {
       let cart = req.body.cart;
 
       // todo: check for if the cart is tempered or not [done]
-      for (let item in req.body.cart) {
+      for (let item in cart) {
         product = await Product.findOne({ slug: item });
         sum += cart[item].price * cart[item].qty;
 
@@ -34,7 +34,7 @@ async function handler(req, res) {
       }
 
       //todo: check if the total bill is tempered or not [ done ]
-      if (sum !== req.body.amount) {
+      if (sum !== req.body.subTotal) {
         res.status(401).json({
           success: false,
           error: "There is some error in your cart. Please shop again.",
@@ -42,17 +42,16 @@ async function handler(req, res) {
         return;
       }
       const order = await new Order({
-        email: req.body.email,
-        orderId: req.body.orderId,
+        email: req.body.checkOutCred.email,
+        orderId: req.body.checkOutCred.orderId,
         products: req.body.cart,
-        address: req.body.address,
-        paymentInfo: req.body.paymentInfo,
-        amount: req.body.amount,
-        status: req.body.paymentInfo ? "Paid" : "Pending",
+        address: req.body.checkOutCred.address,
+        paymentInfo: req.body.checkOutCred.paymentInfo,
+        amount: req.body.subTotal,
+        status: req.body.checkOutCred.paymentInfo ? "Paid" : "Pending",
       });
       await order.save();
       res.status(200).json({ success: true, orderId: order.orderId });
-      global.cart = { cart: req.body };
     } else {
       res.status(400).json({ error: "Request method is not permitted!" });
     }

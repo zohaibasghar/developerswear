@@ -3,6 +3,10 @@ import { useRouter } from "next/router";
 const Orders = () => {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
+
+  let unique = [];
+
+  console.log(unique);
   useEffect(() => {
     const getOrder = async () => {
       let req = await fetch("/api/myorders", {
@@ -20,7 +24,7 @@ const Orders = () => {
     } else {
       getOrder();
     }
-  });
+  }, [router]);
   return (
     <div className="container mx-auto min-h-screen">
       <h1 className="text-center text-2xl font-semibold m-6">My Orders</h1>
@@ -44,22 +48,29 @@ const Orders = () => {
           </thead>
           <tbody>
             {orders.map((order) => {
-              return (
-                <tr
-                  key={order.orderId}
-                  className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <th
-                    // scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              let setArr = [];
+              setArr.push(order);
+              if (unique.includes(order.orderId)) {
+                return;
+              } else {
+                unique.push(order.orderId);
+                return (
+                  <tr
+                    key={order.orderId}
+                    className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
-                    {order.orderId}
-                  </th>
-                  <td className="px-6 py-4">{order.paymentInfo}</td>
-                  <td className="px-6 py-4">{order.status}</td>
-                  <td className="px-6 py-4">$ {order.amount}</td>
-                </tr>
-              );
+                    <th
+                      // scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {order.orderId}
+                    </th>
+                    <td className="px-6 py-4">{order.paymentInfo}</td>
+                    <td className="px-6 py-4">{order.status}</td>
+                    <td className="px-6 py-4">$ {order.amount}</td>
+                  </tr>
+                );
+              }
             })}
           </tbody>
         </table>

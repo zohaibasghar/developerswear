@@ -6,7 +6,7 @@ import Head from "next/head";
 
 function OrderPage({ order, orderProduct }) {
   const products = order.products;
-
+  
   return (
     <>
       <Head>

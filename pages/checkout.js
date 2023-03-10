@@ -107,6 +107,9 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
       toast.error(jsonData.error);
       clearCart()
     }
+    else if(jsonData.success==="serviceArea"){
+      toast.error(jsonData.error)
+    }
   };
   const banks = [
     {
@@ -283,7 +286,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
                         key={item}
                       >
                         <BsViewList />
-                        <h3>{cart[item].name}</h3>
+                        <h3 className="text-center">{cart[item].name} {cart[item].variant}/{cart[item].size}</h3>
                         <div className="quan flex text-center items-center">
                           <AiOutlinePlus
                             className="cursor-pointer hover:bg-yellow-100"

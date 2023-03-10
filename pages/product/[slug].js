@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import mongoose from "mongoose";
 import Product from "@/models/Product";
-import { BsCheckLg } from "react-icons/bs";
 function ProductPage({ addtoCart, product, variants, buyNow }) {
   const router = useRouter();
   const { slug } = router.query;
@@ -14,7 +13,8 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
     const userRef = userPin.current.value;
     const data = await fetch("/api/pincode");
     const pincodes = await data.json();
-    if (pincodes.includes(parseInt(userRef))) {
+
+    if (Object.keys(pincodes).includes(userRef)) {
       setService(true);
     } else {
       setService(false);
@@ -22,13 +22,24 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
   };
   const [color, setColor] = useState(product.color);
   const [size, setSize] = useState(product.size);
-
+  const [productImg, setProductImg] = useState(product.img);
   const sizeSelection = (newSize) => {
     setSize(newSize);
     setColor(product.color);
   };
-  const colorSelection = (newColor) => {
+  useEffect(() => {}, [color]);
+
+  const colorSelection = async (newColor) => {
     setColor(newColor);
+    let newImg = await fetch("/api/imgfetch", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug: product.slug, color: color }),
+    });
+    let resImg = await newImg.json();
+    setProductImg(resImg.img);
   };
   return (
     product && (
@@ -41,7 +52,7 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
                 height={600}
                 alt={product.slug}
                 className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                src={product.img}
+                src={productImg}
               />
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -156,8 +167,11 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
                       Object.keys(variants[size]).map((c) => {
                         return (
                           <button
+                          title="Double click to load image"
                             key={c}
-                            className={`border-2 border-gray-800 ml-1 ${c=='white'?'bg-white':`bg-${c}-700`} rounded-full w-6 h-6 focus:outline-none ${
+                            className={`border-2 border-gray-800 ml-1 ${
+                              c == "white" ? "bg-white" : `bg-${c}-700`
+                            } rounded-full w-6 h-6 focus:outline-none ${
                               color === c
                                 ? "border-gray-300"
                                 : "border-gray-500"

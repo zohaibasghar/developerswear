@@ -1,13 +1,13 @@
 import Order from "@/models/Order";
 import Product from "@/models/Product";
 import connectDB from "@/middleware/db";
+import pincodes from "@/pincodes.json";
 async function handler(req, res) {
   try {
     if (req.method == "POST") {
       let sum = 0,
         product;
       let cart = req.body.cart;
-
       // todo: check for if the cart is tempered or not [done]
       for (let item in cart) {
         product = await Product.findOne({ slug: item });
@@ -32,7 +32,17 @@ async function handler(req, res) {
           return;
         }
       }
-
+      
+      if (!Object.keys(pincodes).includes(req.body.checkOutCred.pinCode)) {
+        res
+          .status(501)
+          .json({
+            success: "serviceArea",
+            error:
+              "Sorry! Your area is not serviceable yet. stay tuned for updates.",
+          });
+        return;
+      }
       //todo: check if the total bill is tempered or not [ done ]
       if (sum !== req.body.subTotal) {
         res.status(401).json({

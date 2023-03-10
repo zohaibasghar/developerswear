@@ -6,7 +6,10 @@ export default async function handler(req, res) {
     let order = await Order.findOne({ orderId: req.body.id });
     let cart = order.products;
 
-    for (let item in cart) {
+
+
+    // TODO: decrease the stock from products after successful order
+    // for (let item in cart) {
       // let product = await Product.findOne({ slug: item, size:cart[item].size });
       // console.log(product)
       //   await Product.findOneAndUpdate(
@@ -17,7 +20,7 @@ export default async function handler(req, res) {
       //       },
       //     }
       //   );
-    }
+    // }
     res.status(200).json({ success: true, error: "Stock updated!" });
   } else {
     res.status(400).json({ error: "Method not allowed!" });

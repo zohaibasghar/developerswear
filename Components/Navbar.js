@@ -9,7 +9,11 @@ import {
 } from "react-icons/ai";
 import { BsViewList } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
-import { MdAccountCircle } from "react-icons/md";
+import {
+  MdAccountCircle,
+  MdIncompleteCircle,
+  MdShoppingCart,
+} from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Navbar = ({
@@ -100,7 +104,7 @@ const Navbar = ({
             <Link
               href={""}
               // onClick={logout}
-              className="absolute right-16 text-3xl  top-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
+              className="absolute right-16 text-3xl top-3 mr-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
               onMouseEnter={() => {
                 setDropDown(true);
               }}
@@ -111,8 +115,8 @@ const Navbar = ({
               <MdAccountCircle />
             </Link>
           )}
-  
-          {dropDown===true && user.value && (
+
+          {dropDown === true && user.value && (
             <ul
               className="absolute right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32 "
               onMouseEnter={() => {
@@ -132,7 +136,13 @@ const Navbar = ({
                   Orders
                 </li>
               </Link>
-              <Link onClick={()=>{logout();setDropDown(false)}} href={""}>
+              <Link
+                onClick={() => {
+                  logout();
+                  setDropDown(false);
+                }}
+                href={""}
+              >
                 <li className="text-sm font-bold hover:text-gray-800 py-1 cursor-pointer">
                   logout
                 </li>
@@ -142,7 +152,7 @@ const Navbar = ({
           {!user.value && (
             <Link
               href={"/login"}
-              className="absolute right-20 text-md hover:text-blue-700 top-4  hover:bg-yellow-700 p-1 rounded bg-yellow-500 py-1 px-2"
+              className="absolute right-28 text-md hover:text-blue-700 top-4  hover:bg-yellow-700 p-1 rounded bg-yellow-500 py-1 px-2"
             >
               Login
             </Link>
@@ -150,9 +160,18 @@ const Navbar = ({
           <Link
             href={"#"}
             onClick={openCart}
-            className="absolute right-0 hover:text-blue-700 top-4 mx-5 hover:bg-yellow-500 p-1 rounded"
+            className="absolute right-0 flex top-3 mr-5  hover:bg-yellow-500 rounded"
           >
-            <AiOutlineShoppingCart className="text-3xl " />
+            <div className="font-sans block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 align-middle text-white text-xl p-1 pt-2">
+              
+                <MdShoppingCart className="text-3xl " />
+                {Object.keys(cart).length > 0 && (
+                  <span className="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
+                    {Object.keys(cart).length}
+                  </span>
+                )}
+              
+            </div>
           </Link>
         </div>
       </nav>
@@ -213,20 +232,21 @@ const Navbar = ({
             </ol>
           </div>
           <div className="checkoutBtn flex justify-between">
-            <Link
-              href={"/checkout"}
-              className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-              onClick={closeCart}
-            >
-              Check Out
+            <Link href={"/checkout"} onClick={closeCart}>
+              <button
+                className="bg-gray-900 disabled:bg-gray-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                disabled={Object.keys(cart).length == 0}
+              >
+                Check Out
+              </button>
             </Link>
-
             <button
-              className="bg-transparent hover:bg-gray-900 text-gray-900 font-semibold hover:text-white py-2 px-4 border border-gray-900 hover:border-transparent rounded"
+              className="bg-transparent disabled:border-0 disabled:text-white disabled:bg-gray-400 hover:bg-gray-900 text-gray-900 font-semibold hover:text-white py-2 px-4 border border-gray-900 hover:border-transparent rounded"
               onClick={() => {
                 toast.info(`Cart cleared!`);
                 clearCart();
               }}
+              disabled={Object.keys(cart).length == 0}
             >
               Clear Cart
             </button>

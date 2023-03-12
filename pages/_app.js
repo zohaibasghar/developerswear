@@ -56,15 +56,26 @@ export default function App({ Component, pageProps }) {
   // add item to the cart
   const addtoCart = (itemCode, qty, size, price, name, variant) => {
     let newCart = { ...cart };
+    
     if (!(itemCode in cart)) {
       newCart[itemCode] = { name, qty: 1, size, price, variant };
       toast.success(`Item added successfully!`);
-    } else {
-      newCart[itemCode].qty = cart[itemCode].qty + qty;
+    } else if (newCart[itemCode].size !== size || newCart[itemCode].variant !== variant) {
+      // if the size or variant is different, create a new entry
+      newCart[`${itemCode}+${size}+${variant}`] = { name, qty: 1, size, price, variant };
+      toast.success(`Item added successfully!`);
+    } else if (newCart[itemCode].size === size) {
+      // if the size is the same, update the quantity
+      newCart[itemCode].qty += qty;
+      toast.success(`Item quantity updated!`);
     }
+    
+    console.log(newCart)
     setCart(newCart);
     saveCart(newCart);
   };
+  
+  
 
   // delete all items in cart
   const clearCart = () => {
@@ -141,6 +152,7 @@ export default function App({ Component, pageProps }) {
         cart={cart}
         addtoCart={addtoCart}
         lessinCart={lessinCart}
+        user={user}
         clearCart={clearCart}
         subTotal={subTotal}
         {...pageProps}

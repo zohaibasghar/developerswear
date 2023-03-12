@@ -152,7 +152,7 @@ const Navbar = ({
           {!user.value && (
             <Link
               href={"/login"}
-              className="absolute right-28 text-md hover:text-blue-700 top-4  hover:bg-yellow-700 p-1 rounded bg-yellow-500 py-1 px-2"
+              className="absolute right-20 text-md hover:text-blue-700 top-4  hover:bg-yellow-700 p-1 rounded bg-yellow-500 py-1 px-2"
             >
               Login
             </Link>

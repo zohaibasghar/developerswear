@@ -35,10 +35,16 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
         body: JSON.stringify({ token }),
       });
       let data = await fet.json();
+
       const newstate = {
         ...checkOutCred,
-        name: data.decoded.name,
-        email: data.decoded.email,
+        name: data.user.name,
+        email: data.user.email,
+        phone: data.user.phone || "",
+        address: data.user.address || "",
+        pinCode: data.user.pincode || "",
+        state: data.state || "",
+        city: data.city || "",
       };
       setCheckOutCred(newstate);
     };
@@ -96,19 +102,18 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
       router.push(`/order?id=${checkOutCred.orderId}`);
       clearCart();
       toast.success("Order placed successfully!");
-      // let postTrx = await fetch("/api/posttransaction", {
-      //   method: "PUT",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ id: checkOutCred.orderId }),
-      // });
+      await fetch("/api/posttransaction", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: checkOutCred.orderId }),
+      });
     } else if (jsonData.success === false) {
       toast.error(jsonData.error);
-      clearCart()
-    }
-    else if(jsonData.success==="serviceArea"){
-      toast.error(jsonData.error)
+      clearCart();
+    } else if (jsonData.success === "serviceArea") {
+      toast.error(jsonData.error);
     }
   };
   const banks = [
@@ -286,7 +291,10 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
                         key={item}
                       >
                         <BsViewList />
-                        <h3 className="text-center">{cart[item].name} {cart[item].variant}/{cart[item].size}</h3>
+                        <h3 className="text-center">
+                          {cart[item].name} {cart[item].variant}/
+                          {cart[item].size}
+                        </h3>
                         <div className="quan flex text-center items-center">
                           <AiOutlinePlus
                             className="cursor-pointer hover:bg-yellow-100"

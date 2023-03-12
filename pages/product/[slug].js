@@ -167,7 +167,7 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
                       Object.keys(variants[size]).map((c) => {
                         return (
                           <button
-                          title="Double click to load image"
+                            title="Double click to load image"
                             key={c}
                             className={`border-2 border-gray-800 ml-1 ${
                               c == "white" ? "bg-white" : `bg-${c}-700`
@@ -217,10 +217,16 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
                 </div>
                 <div className="flex">
                   <span className="title-font font-medium text-2xl text-white">
-                    ${product.price}
+                    {product.availableQty > 0 ? (
+                      `\$${product.price}`
+                    ) : (
+                      <div className="text-yellow-500 ">
+                        Out of stock!
+                      </div>
+                    )}
                   </span>
                   <button
-                    className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded"
+                    className="flex ml-auto text-white disabled:bg-yellow-200 disabled:text-gray-700 bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded"
                     onClick={() => {
                       buyNow(
                         slug,
@@ -231,11 +237,12 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
                         color
                       );
                     }}
+                    disabled={product.availableQty <= 0}
                   >
                     Buy Now
                   </button>
                   <button
-                    className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded"
+                    className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 disabled:bg-yellow-200 disabled:text-gray-700 focus:outline-none hover:bg-yellow-600 rounded"
                     onClick={() => {
                       addtoCart(
                         slug,
@@ -246,6 +253,7 @@ function ProductPage({ addtoCart, product, variants, buyNow }) {
                         color
                       );
                     }}
+                    disabled={product.availableQty <= 0}
                   >
                     Add to Cart
                   </button>

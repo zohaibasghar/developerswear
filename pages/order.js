@@ -6,7 +6,7 @@ import Head from "next/head";
 
 function OrderPage({ order, orderProduct }) {
   const products = order.products;
-  
+
   return (
     <>
       <Head>
@@ -100,12 +100,14 @@ export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect("mongodb://127.0.0.1:27017/test");
   }
-
   let order = await Order.findOne({ orderId: context.query.id });
-
+  let productSlug = Object.keys(order.products)[0];
   let orderProduct = await Product.findOne({
-    slug: Object.keys(order.products)[0],
+    slug: productSlug,
+    color: order.products[productSlug].variant,
+    size: order.products[productSlug].size,
   });
+
   return {
     props: {
       order: JSON.parse(JSON.stringify(order)),

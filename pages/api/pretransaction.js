@@ -14,7 +14,6 @@ async function handler(req, res) {
         sum += cart[item].price * cart[item].qty;
 
         // todo: check if the stock available or not [done]
-
         if (product.availableQty < cart[item].qty) {
           res.status(401).json({
             success: false,
@@ -55,7 +54,7 @@ async function handler(req, res) {
         email: req.body.checkOutCred.email,
         orderId: req.body.checkOutCred.orderId,
         products: req.body.cart,
-        address: req.body.checkOutCred.address,
+        address: `${req.body.checkOutCred.address}~ ${req.body.checkOutCred.city}~ ${req.body.checkOutCred.state}~ ${req.body.checkOutCred.pinCode}`,
         paymentInfo: req.body.checkOutCred.paymentInfo,
         amount: req.body.subTotal,
         status: req.body.checkOutCred.paymentInfo ? "Paid" : "Pending",

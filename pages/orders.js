@@ -6,7 +6,6 @@ const Orders = () => {
 
   let unique = [];
 
-  console.log(unique);
   useEffect(() => {
     const getOrder = async () => {
       let req = await fetch("/api/myorders", {

@@ -27,7 +27,7 @@ const Signup = () => {
     if (data.result === "success") {
       setUser({ name: "", email: "", password: "" });
       router.push("/");
-      toast.success(`${user.name}!  Welcome on board. `);
+      toast.success(`${user.name}!  Welcome on board. Now login! `);
     } else {
       toast.error(`Kindly enter valid credentials!`);
     }

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -101,6 +102,16 @@ const MyAccount = () => {
   };
   return (
     <Fragment>
+      <Head>
+        <title>Account Details | Developer Wear</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container  mx-auto">
         <h2 className="text-center font-bold text-2xl my-2">
           Update your account info.
@@ -217,7 +228,7 @@ const MyAccount = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="oPass"
-                type="text"
+                type="password"
                 name="oPass"
                 placeholder="Enter your old password"
                 onChange={passCredChange}
@@ -236,7 +247,7 @@ const MyAccount = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="nPass"
-                type="text"
+                type="password"
                 name="nPass"
                 placeholder="Enter New password"
                 onChange={passCredChange}
@@ -253,7 +264,7 @@ const MyAccount = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-800 border border-red-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="cPass"
-                type="text"
+                type="password"
                 name="cPass"
                 placeholder="Confirm your New password"
                 onChange={passCredChange}

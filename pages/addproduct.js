@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Head from "next/head";
+import { Fragment, useState } from "react";
 
 const AddProduct = () => {
   const [productCred, setProductCred] = useState({
@@ -30,6 +31,17 @@ const AddProduct = () => {
   };
 
   return (
+    <Fragment>
+      <Head>
+        <title>Add product to database | Developer Wear</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold text-center m-4">Add Product</h2>
       <form action="POST" onSubmit={handleSubmit}>
@@ -198,6 +210,7 @@ const AddProduct = () => {
         </div>
       </form>
     </div>
+    </Fragment>
   );
 };
 

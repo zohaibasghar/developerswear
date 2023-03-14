@@ -10,7 +10,14 @@ function OrderPage({ order, orderProduct }) {
   return (
     <>
       <Head>
-        <title>{`Order Confirmed! ${orderProduct.title}`}</title>
+        <title>Order Confirmed | Developer Wear</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="text-gray-400 bg-gray-900 body-font overflow-hidden">
         <div className="container px-5 py-10 mx-auto">

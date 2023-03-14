@@ -2,10 +2,21 @@ import Product from "@/models/Product";
 import Image from "next/image";
 import mongoose from "mongoose";
 import Link from "next/link";
+import Head from "next/head";
 
 const Mugs = ({ products }) => {
   return Object.keys(products).length != 0 ? (
     <div>
+      <Head>
+        <title>Mugs | Developer Wear</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <section className="text-gray-400 bg-gray-900 body-font">
         <div className="container px-2 py-10 mx-auto">
           <div className="flex flex-wrap -m-4 gap-2 justify-center">

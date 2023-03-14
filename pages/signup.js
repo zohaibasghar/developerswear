@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -33,6 +34,17 @@ const Signup = () => {
     }
   };
   return (
+    <>
+    <Head>
+        <title>Developer Wear | Create Account</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <section className="text-gray-400 bg-gray-900 body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div className="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:mx-auto w-full mt-10 md:mt-0">
@@ -105,6 +117,7 @@ const Signup = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

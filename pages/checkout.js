@@ -2,10 +2,11 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
 import { BsViewList } from "react-icons/bs";
 import { Dialog } from "@headlessui/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/bank.module.css";
 import { toast } from "react-toastify";
+import Head from "next/head";
 const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
   let [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -148,6 +149,17 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
   ];
 
   return (
+    <Fragment>
+    <Head>
+        <title>Checkout your orders | Developer Wear</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <div className="bg-gray-900">
       <div className="container mx-auto py-5 ">
         <h2 className="text-center font-bold text-3xl">Checkout</h2>
@@ -406,6 +418,7 @@ const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
         </div>
       </Dialog>
     </div>
+    </Fragment>
   );
 };
 

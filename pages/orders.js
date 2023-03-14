@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 const Orders = () => {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
@@ -25,6 +26,17 @@ const Orders = () => {
     }
   }, [router]);
   return (
+    <>
+    <Head>
+        <title>Orders | Developer Wear</title>
+        <meta
+          name="description"
+          content="the most affordable accessories for programmers and developer and coders"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <div className="container mx-auto min-h-screen">
       <h1 className="text-center text-2xl font-semibold m-6">My Orders</h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mb-8">
@@ -75,6 +87,7 @@ const Orders = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

@@ -26,13 +26,14 @@ const MyAccount = () => {
       body: JSON.stringify({ token }),
     });
     let data = await fet.json();
+    console.log(data);
     const newstate = {
       ...userCred,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      address: data.address,
-      pinCode: data.pincode,
+      name: data.user.name,
+      email: data.user.email,
+      phone: data.user.phone,
+      address: data.user.address,
+      pinCode: data.user.pincode,
     };
     setEmail(data.email);
     setUserCred(newstate);

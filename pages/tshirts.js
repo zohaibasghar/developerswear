@@ -23,7 +23,7 @@ const Tshirts = ({ products }) => {
             {Object.keys(products).map((item) => {
               return (
                 <Link
-                  passHref={true}
+                  // passHref={true}
                   href={`/product/${products[item].slug}`}
                   key={products[item]._id}
                   className="lg:w-1/5 md:w-1/3 p-4 bg-gray-600 bg-opacity-20"

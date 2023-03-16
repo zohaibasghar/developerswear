@@ -1,6 +1,6 @@
 import connectDB from "@/middleware/db";
 import User from "@/models/User";
-var CryptoJS = require("crypto-js");
+let CryptoJS = require("crypto-js");
 async function handler(req, res) {
   if (req.method === "PUT") {
     let user = await User.findOne({ email: req.body.email });

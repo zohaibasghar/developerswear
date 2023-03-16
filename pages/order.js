@@ -83,7 +83,7 @@ function OrderPage({ order, orderProduct }) {
                 <div className="flex flex-row">
                   <span>Products:</span>
                   <span className="text-white">
-                    &nbsp;{Object.keys(order.products)}
+                    &nbsp;{Object.keys(order.products).map((slug)=>`${slug}, `)}
                   </span>
                 </div>
               </div>

@@ -108,11 +108,11 @@ export default function App({ Component, pageProps }) {
 
   // user logout
   const logout = () => {
+    router.push("/");
     localStorage.removeItem("auth-token");
     setUser({ value: null });
     setKey(Math.random());
     toast.info("Logout Successfully!");
-    router.push("/");
   };
 
   return (

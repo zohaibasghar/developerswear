@@ -1,384 +1,576 @@
 [{
   "_id": {
-    "$oid": "63e8b9f036970ae6bcf3f2ec"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-black",
-  "desc": "Wear our amazing shirts",
-  "img": "https://ih1.redbubble.net/image.830561167.2848/ssrco,classic_tee,womens,101010:01c5ca27c6,front_alt,square_product,600x600.u1.jpg",
-  "category": "shirt",
-  "size": "S",
-  "color": "purple",
-  "price": 499,
-  "availableQty": 5,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196336624"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1677923110049"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63e8ba2736970ae6bcf3f2ef"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-red",
-  "desc": "Wear our amazing shirts",
-  "img": "https://m.media-amazon.com/images/I/B1DnWZEQ8ES._CLa%7C2140%2C2000%7C61c4gPjJPML.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SL1500_.png",
-  "category": "shirt",
-  "size": "M",
-  "color": "red",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196391980"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676196391980"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63e8ba6836970ae6bcf3f2f1"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-blue",
-  "desc": "Wear our amazing shirts",
-  "img": "https://m.media-amazon.com/images/I/61G3K8QPAuL._UX569_.jpg",
-  "category": "shirt",
-  "size": "L",
-  "color": "blue",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196456148"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676196456148"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63e8bab436970ae6bcf3f2f3"
-  },
-  "title": "Programmers Mug",
-  "slug": "drink-coffee-white",
-  "desc": "drink coffee like a boss",
-  "img": "https://i.etsystatic.com/16068233/r/il/1408f7/1894632441/il_fullxfull.1894632441_n7yr.jpg",
-  "category": "Mug",
-  "size": "L",
-  "color": "white",
-  "price": 499,
-  "availableQty": 2,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196532836"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676196532836"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63e8badd36970ae6bcf3f2f5"
-  },
-  "title": "Programmers Mug",
-  "slug": "drink-coffee-black",
-  "desc": "drink coffee like a boss",
-  "img": "https://i.pinimg.com/736x/da/30/05/da300559ddd9d349dc5868109a2b9425.jpg",
-  "category": "Mug",
-  "size": "L",
-  "color": "black",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196573160"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676196573160"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63e8bb1236970ae6bcf3f2f7"
-  },
-  "title": "Programmers Mug",
-  "slug": "drink-coffee-yellow",
-  "desc": "drink coffee like a boss",
-  "img": "https://techmark.pk/wp-content/uploads/2021/06/js-mug-11.webp",
-  "category": "Mug",
-  "size": "L",
-  "color": "yellow",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196626806"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676196626806"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63e8bb7036970ae6bcf3f2f9"
-  },
-  "title": "Eat sleep code Repeat",
-  "slug": "wear-the-code-black",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "L",
-  "color": "yellow",
-  "price": 999,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676196720752"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676196720752"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ea17dd36970ae6bcf3f3ac"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-red-s",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "S",
-  "color": "red",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676285917735"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676285917735"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ea67c12cfefe6d0897ae3a"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-blue-m",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "M",
-  "color": "blue",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676306369191"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676306369191"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ea67d12cfefe6d0897ae3c"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-gray-l",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "L",
-  "color": "gray",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676306385983"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676306385983"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ea67f02cfefe6d0897ae40"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-yellow-l",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "L",
-  "color": "yellow",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676306416707"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676306416707"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ea68542cfefe6d0897ae44"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-yellow-xl",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "XL",
-  "color": "yellow",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676306516150"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676306516150"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ea68672cfefe6d0897ae46"
-  },
-  "title": "Tshirt",
-  "slug": "wear-the-code-tshirt-blue-xxl",
-  "desc": "Wear the code and code",
-  "img": "https://cdn.shopify.com/s/files/1/0045/5344/1373/products/mockup46GY_533x.png",
-  "category": "Shirt",
-  "size": "XXL",
-  "color": "blue",
-  "price": 499,
-  "availableQty": 32,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676306535764"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676306535764"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ed10b9c552e41ebe0fb815"
-  },
-  "title": "Coders Hoodie",
-  "slug": "wear-the-code-hoodie",
-  "desc": "wear our hoodie and code",
-  "img": "https://merchshop.in/wp-content/uploads/2019/06/rule-of-programming-black.jpg",
-  "category": "hoodies",
-  "size": "L",
-  "color": "black",
-  "price": 1499,
-  "availableQty": 5,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676480697603"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1677922578026"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ed10f0c552e41ebe0fb819"
-  },
-  "title": "Coders Hoodie",
-  "slug": "wear-the-code-hoodie-white",
-  "desc": "wear our hoodie and code",
-  "img": "https://ih1.redbubble.net/image.4456778124.2018/ssrco,mhoodie,mens,fafafa:ca443f4786,front,square_product,x600-bg,f8f8f8.1.jpg",
-  "category": "hoodies",
-  "size": "L",
-  "color": "white",
-  "price": 1499,
-  "availableQty": 2,
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1676480752056"
-    }
-  },
-  "updatedAt": {
-    "$date": {
-      "$numberLong": "1676480752056"
-    }
-  },
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "63ed1238c552e41ebe0fb823"
+    "$oid": "640a1059f3e053553f58487d"
   },
   "title": "Coders stickers",
   "slug": "wear-the-code-stickers",
-  "desc": "inspire by stickers and code",
-  "img": "https://i.pinimg.com/736x/3f/33/e3/3f33e30decc2f2878eecad68e32d6c66.jpg",
+  "desc": "stickers for the coders",
+  "img": "https://rukminim1.flixcart.com/image/416/416/l3bx5e80/sticker/3/p/e/small-coding-programming-sticker-decals-pack-of-16-2-5-code-am-original-imageh5wsftsugzy.jpeg",
   "category": "stickers",
-  "size": "M",
+  "size": "S",
   "color": "white",
-  "price": 299,
-  "availableQty": 9,
+  "price": 233,
+  "availableQty": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1676481080936"
+      "$numberLong": "1678381145428"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1677923397395"
+      "$numberLong": "1678596599769"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a10e3f3e053553f584887"
+  },
+  "title": "Coders stickers",
+  "slug": "wear-the-code-stickers-rust",
+  "desc": "stickers for the coders",
+  "img": "https://i.etsystatic.com/27024673/r/il/9af965/3601476621/il_1080xN.3601476621_nj57.jpg",
+  "category": "stickers",
+  "size": "S",
+  "color": "white",
+  "price": 255,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381283237"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381283237"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a10fbf3e053553f58488a"
+  },
+  "title": "Coders stickers rust",
+  "slug": "wear-the-code-stickers-rust",
+  "desc": "stickers for the coders",
+  "img": "https://i.etsystatic.com/27024673/r/il/9af965/3601476621/il_1080xN.3601476621_nj57.jpg",
+  "category": "stickers",
+  "size": "S",
+  "color": "white",
+  "price": 255,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381307712"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381307712"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a1144f3e053553f584890"
+  },
+  "title": "Coders stickers rust",
+  "slug": "wear-the-code-stickers-rust",
+  "desc": "stickers for the coders",
+  "img": "https://i.etsystatic.com/27024673/r/il/9af965/3601476621/il_1080xN.3601476621_nj57.jpg",
+  "category": "stickers",
+  "size": "M",
+  "color": "white",
+  "price": 255,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381380079"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381380079"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a1155f3e053553f584893"
+  },
+  "title": "Coders stickers rust",
+  "slug": "wear-the-code-stickers-rust",
+  "desc": "stickers for the coders",
+  "img": "https://i.etsystatic.com/27024673/r/il/9af965/3601476621/il_1080xN.3601476621_nj57.jpg",
+  "category": "stickers",
+  "size": "L",
+  "color": "gray",
+  "price": 255,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381397555"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381397555"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a11c0f3e053553f584896"
+  },
+  "title": "Debugging Mug",
+  "slug": "coders-mug",
+  "desc": "drink coffee in our mug and code",
+  "img": "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71NBWUjI1fL.jpg",
+  "category": "mug",
+  "size": "R",
+  "color": "white",
+  "price": 499,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381504496"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381504496"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a11daf3e053553f584899"
+  },
+  "title": "Debugging Mug",
+  "slug": "coders-mug",
+  "desc": "drink coffee in our mug and code",
+  "img": "https://m.media-amazon.com/images/I/71HfC5uoJvL._SX425_.jpg",
+  "category": "mug",
+  "size": "R",
+  "color": "black",
+  "price": 499,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381530930"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381530930"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a123ff3e053553f58489c"
+  },
+  "title": "Mug with conditonal login",
+  "slug": "condition-coder-mug",
+  "desc": "stating the conditions for drinking coffee or not",
+  "img": "https://i.pinimg.com/originals/fe/d2/f5/fed2f5e7d44aa5d77e06dd88c639bf20.jpg",
+  "category": "mug",
+  "size": "R",
+  "color": "black",
+  "price": 876,
+  "availableQty": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381631975"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381631975"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a1317f3e053553f5848a8"
+  },
+  "title": "Eat sleep code repeat",
+  "slug": "coders-tshirt-eat-sleep-code-repeat",
+  "desc": "tshirt with checklist of eat sleep code and repeat",
+  "img": "https://designyourown.pk/wp-content/uploads/2017/06/design-your-own-tshirt-creo-design-02-white-programmer-t-shirt.jpg",
+  "category": "tshirt",
+  "size": "M",
+  "color": "white",
+  "price": 999,
+  "availableQty": 33,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381847756"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381847756"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a132ef3e053553f5848aa"
+  },
+  "title": "Eat sleep code repeat",
+  "slug": "coders-tshirt-eat-sleep-code-repeat",
+  "desc": "tshirt with checklist of eat sleep code and repeat",
+  "img": "data:image/jpeg;base64,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",
+  "category": "tshirt",
+  "size": "M",
+  "color": "Black",
+  "price": 999,
+  "availableQty": 33,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381870430"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381870430"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a1332f3e053553f5848ac"
+  },
+  "title": "Eat sleep code repeat",
+  "slug": "coders-tshirt-eat-sleep-code-repeat",
+  "desc": "tshirt with checklist of eat sleep code and repeat",
+  "img": "data:image/jpeg;base64,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",
+  "category": "tshirt",
+  "size": "L",
+  "color": "black",
+  "price": 999,
+  "availableQty": 33,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381874602"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381874602"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a1348f3e053553f5848ae"
+  },
+  "title": "Eat sleep code repeat",
+  "slug": "coders-tshirt-eat-sleep-code-repeat",
+  "desc": "tshirt with checklist of eat sleep code and repeat",
+  "img": "https://designyourown.pk/wp-content/uploads/2017/06/design-your-own-tshirt-creo-design-02-white-programmer-t-shirt.jpg",
+  "category": "tshirt",
+  "size": "S",
+  "color": "white",
+  "price": 999,
+  "availableQty": 33,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381896794"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381896794"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a13abf3e053553f5848b0"
+  },
+  "title": "if it works don't touch it",
+  "slug": "coders-tshirt-if-it-works",
+  "desc": "1st rule of programming if it is working, Don't touch it",
+  "img": "https://merchshop.in/wp-content/uploads/2019/05/1st-rule-of-programming-navy-blue-t-shirts.jpg",
+  "category": "tshirt",
+  "size": "L",
+  "color": "blue",
+  "price": 999,
+  "availableQty": 33,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678381995813"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678381995813"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a13b1f3e053553f5848b2"
+  },
+  "title": "if it works don't touch it",
+  "slug": "coders-tshirt-if-it-works",
+  "desc": "1st rule of programming if it is working, Don't touch it",
+  "img": "https://merchshop.in/wp-content/uploads/2019/05/1st-rule-of-programming-navy-blue-t-shirts.jpg",
+  "category": "tshirt",
+  "size": "M",
+  "color": "blue",
+  "price": 999,
+  "availableQty": 33,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678382001302"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678382001302"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640a13cdf3e053553f5848b4"
+  },
+  "title": "if it works don't touch it",
+  "slug": "coders-tshirt-if-it-works",
+  "desc": "1st rule of programming if it is working, Don't touch it",
+  "img": "https://merchshop.in/wp-content/uploads/2019/05/1st-rule-of-programming-navy-blue-t-shirts.jpg",
+  "category": "tshirt",
+  "size": "XL",
+  "color": "blue",
+  "price": 999,
+  "availableQty": 2,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678382029310"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678382029310"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640af925f3e053553f5848c4"
+  },
+  "title": "programmer hoodie",
+  "slug": "wear-coding-hoodie",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://ih1.redbubble.net/image.2137345078.3003/ssrco,mhoodiez,mens,101010:01c5ca27c6,front,square_product,600x600-bg,f8f8f8.u3.jpg",
+  "category": "hoodies",
+  "size": "M",
+  "color": "black",
+  "price": 1999,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440741588"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440741588"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640af947f3e053553f5848c6"
+  },
+  "title": "programmer hoodie",
+  "slug": "wear-coding-hoodie",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://m.media-amazon.com/images/I/B1paZXqZSQS._CLa%7C2140%2C2000%7C71DzvT7mpBL.png%7C0%2C0%2C2140%2C2000%2B659.0%2C492.0%2C777.0%2C701.0_AC_SX342_.png",
+  "category": "hoodies",
+  "size": "M",
+  "color": "blue",
+  "price": 1999,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440775517"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440775517"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640af9bcf3e053553f5848c8"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://ae01.alicdn.com/kf/Hf2c748e1715841bda3d316f8244f9e5eo/Computer-Programming-Language-Python-Sweatshirt-Design-For-Code-Programmer-Homme-Pullover-Hooded-Camiseta.jpg_640x640.jpg",
+  "category": "hoodies",
+  "size": "M",
+  "color": "yellow",
+  "price": 1599,
+  "availableQty": 41,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440892075"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678621925439"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640afa03f3e053553f5848ca"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://m.media-amazon.com/images/I/C1OAc4VyPrS._CLa%7C2140%2C2000%7C71qpeR36YvL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX342_.png",
+  "category": "hoodies",
+  "size": "M",
+  "color": "red",
+  "price": 1599,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440963878"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440963878"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640afa07f3e053553f5848cc"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://m.media-amazon.com/images/I/C1OAc4VyPrS._CLa%7C2140%2C2000%7C71qpeR36YvL.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX342_.png",
+  "category": "hoodies",
+  "size": "L",
+  "color": "red",
+  "price": 1599,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440967833"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440967833"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640afa1bf3e053553f5848ce"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://ih1.redbubble.net/image.2114533075.3966/ssrco,mhoodiez,womens,oatmeal_heather,front,tall_three_quarter,750x1000-bg,f8f8f8.u5.jpg",
+  "category": "hoodies",
+  "size": "S",
+  "color": "white",
+  "price": 1599,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440987296"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440987296"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640afa1df3e053553f5848d0"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://ih1.redbubble.net/image.2114533075.3966/ssrco,mhoodiez,womens,oatmeal_heather,front,tall_three_quarter,750x1000-bg,f8f8f8.u5.jpg",
+  "category": "hoodies",
+  "size": "M",
+  "color": "white",
+  "price": 1599,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440989214"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440989214"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640afa1ff3e053553f5848d2"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://ih1.redbubble.net/image.2114533075.3966/ssrco,mhoodiez,womens,oatmeal_heather,front,tall_three_quarter,750x1000-bg,f8f8f8.u5.jpg",
+  "category": "hoodies",
+  "size": "L",
+  "color": "white",
+  "price": 1599,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440991195"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440991195"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640afa21f3e053553f5848d4"
+  },
+  "title": "python programmer hoodie",
+  "slug": "wear-coding-hoodie-python",
+  "desc": "a hoodie with a logic on it",
+  "img": "https://ih1.redbubble.net/image.2114533075.3966/ssrco,mhoodiez,womens,oatmeal_heather,front,tall_three_quarter,750x1000-bg,f8f8f8.u5.jpg",
+  "category": "hoodies",
+  "size": "XL",
+  "color": "white",
+  "price": 1599,
+  "availableQty": 42,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678440993221"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1678440993221"
     }
   },
   "__v": 0

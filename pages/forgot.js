@@ -68,7 +68,6 @@ const Forgot = () => {
   };
   const passReset = async (e) => {
     e.preventDefault();
-    console.log(passCred);
     setLoading(true);
     let req = await fetch("/api/forgot/passreset", {
       method: "PUT",

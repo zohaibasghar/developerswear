@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Login = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [loginCred, setLoginCred] = useState({ email: "", password: "" });
   const handleChange = (e) => {
     setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
@@ -17,6 +18,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
+    setLoading(true)
     let res = await fetch("api/login", {
       method: "POST",
       headers: {
@@ -25,6 +27,7 @@ const Login = () => {
       body: JSON.stringify(loginCred),
     });
     let data = await res.json();
+    setLoading(false)
     if (data.result) {
       localStorage.setItem("auth-token", data.token);
       setLoginCred({ email: "", password: "" });
@@ -100,7 +103,7 @@ const Login = () => {
               </div>
 
               <button className="text-white font-bold bg-yellow-500 border-0 my-3 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">
-                Login
+                {loading?`Loading...`:`Login`}
               </button>
             </form>
             <Link

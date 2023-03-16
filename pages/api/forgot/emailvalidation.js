@@ -35,15 +35,19 @@ async function handler(req, res) {
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-          from: "meharzohaib123456@gmail.com", // sender address
-          to: "zohaibmehar123456@gmail.com", // list of receivers
+          from: "cs@developerwear.com", // sender address
+          to: user.email, // list of receivers
           subject: "Hello!", // Subject line
-          text: `Hi ${user.name}!\n\tYou have requested to reset your password Kindly enter the below code on the website to reset your password: \n\n ${tokenGen} \n\n If any error occur please contact our customer support service.\n\n
 
-          DeveloperWear\nCEO`, // plain text body
-          html: `Hi ${user.name}!\n\tYou have requested to reset your password Kindly enter the below code on the website to reset your password: \n\n ${tokenGen} \n\n If any error occur please contact our customer support service.\n\n
-          
-          DeveloperWear\nCEO`, // html body
+          html: `<h1>Developer Wear</h1>
+          <p> Dear ${user.name}! You have requested to reset your password Kindly enter the below code on the website to reset your password:</p>
+          <br>
+          <br>
+          <h2>${tokenGen}</h2>
+          <br><br>
+          <p>If any error occur please contact our customer support service.</p>
+          <h4>Password Reset Service</h4>
+          <h5>Developer Wear</h5>`, 
         });
         console.log(info.text);
 
@@ -54,12 +58,10 @@ async function handler(req, res) {
         })
           .save()
           .catch((err) =>
-            res
-              .status(400)
-              .json({
-                success: false,
-                msg: "Email already sent to your email!",
-              })
+            res.status(400).json({
+              success: false,
+              msg: "Email already sent to your email!",
+            })
           );
         console.log(forgot);
         res.status(200).json({

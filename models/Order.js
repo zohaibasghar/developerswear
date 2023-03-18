@@ -11,7 +11,7 @@ const orderSchema = new Schema(
     amount: { type: Number, required: true },
     status: { type: String, default: "Pending" },
   },
-  { timestamps: true, strict: false }
+  { timestamps: true }
 );
 
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);

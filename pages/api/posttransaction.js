@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     // TODO: decrease the stock from products after successful order
     for (let item in cart) {
       let product = await Product.findOne({ slug: item, size:cart[item].size, color:cart[item].variant });
-      console.log(product)
+      
         await Product.findOneAndUpdate(
           { slug: item,size:cart[item].size },
           {

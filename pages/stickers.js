@@ -28,7 +28,7 @@ const Stickers = ({ products }) => {
                   key={products[item]._id}
                   className="lg:w-1/5 md:w-1/3 p-4 bg-gray-600 bg-opacity-20"
                 >
-                  <div className="block relative h-48 rounded overflow-hidden">
+                  <div className="block h-48 rounded overflow-hidden">
                     <Image
                       width={600}
                       height={600}

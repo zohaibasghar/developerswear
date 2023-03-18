@@ -11,7 +11,7 @@ const forgotSchema = new Schema(
       default: Date.now,
     },
   },
-  { timestamps: true, strict: false }
+  { timestamps: true }
 );
 
 const Forgot = mongoose.models.Forgot || mongoose.model("Forgot", forgotSchema);

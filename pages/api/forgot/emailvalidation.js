@@ -5,9 +5,9 @@ const nodemailer = require("nodemailer");
 async function handler(req, res) {
   if (req.method === "POST") {
     let email = req.body.email;
-    console.log(req.body);
+
     let user = await User.findOne({ email }, { password: 0 });
-    console.log(user);
+
     if (user) {
       var rand = function () {
         return Math.floor(Math.random() * 10);
@@ -47,9 +47,8 @@ async function handler(req, res) {
           <br><br>
           <p>If any error occur please contact our customer support service.</p>
           <h4>Password Reset Service</h4>
-          <h5>Developer Wear</h5>`, 
+          <h5>Developer Wear</h5>`,
         });
-        console.log(info.text);
 
         console.log("Message sent: %s", info.messageId);
         let forgot = await Forgot({
@@ -63,7 +62,7 @@ async function handler(req, res) {
               msg: "Email already sent to your email!",
             })
           );
-        console.log(forgot);
+
         res.status(200).json({
           success: true,
           msg: "Check your email inbox for OTP(One time password).",

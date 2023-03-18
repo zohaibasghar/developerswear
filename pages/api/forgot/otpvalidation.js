@@ -5,7 +5,6 @@ async function handler(req, res) {
   if (req.method === "POST") {
     let otpSaved = await Forgot.findOne({ email: req.body.email });
 
-    console.log(otpSaved.token);
     if (otpSaved.token === req.body.otp) {
       res.status(200).json({
         success: true,

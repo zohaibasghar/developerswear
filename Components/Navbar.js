@@ -1,22 +1,124 @@
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import logo from "public/logo-no-background.svg";
+import Image from "next/image";
+import Link from "next/link";
 import {
   AiOutlineShoppingCart,
   AiOutlineCloseCircle,
   AiOutlinePlus,
   AiOutlineMinus,
 } from "react-icons/ai";
-import { BsViewList } from "react-icons/bs";
-import { useEffect, useRef, useState } from "react";
 import {
   MdAccountCircle,
   MdIncompleteCircle,
   MdShoppingCart,
 } from "react-icons/md";
 import { toast } from "react-toastify";
+function NavLink({ to, children }) {
+  return (
+    <a href={to} className={`mx-4`}>
+      {children}
+    </a>
+  );
+}
 
-const Navbar = ({
+function MobileNav({ open, setOpen }) {
+  return (
+    <div
+      className={`absolute top-0 left-0 h-screen w-screen bg-gray-900 transform ${
+        open ? "-translate-x-0" : "-translate-x-full"
+      } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
+    >
+      <div className="flex items-center justify-center filter drop-shadow-md bg-gray-800 h-20">
+        {/*logo container*/}
+        <Link className="text-xl font-semibold" href="/">
+          <Image src={logo} width={200} height={100} alt="Developer's Wear" />
+        </Link>
+      </div>
+      <div className="flex flex-col ml-4">
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          Home
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/tshirts"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          Tshirts
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/mugs"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          Mugs
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/stickers"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          Stickers
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/hoodies"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          Hoodies
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/contact"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          Contact
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/about"
+          onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+        >
+          About
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default function Navbar({
   cart,
   user,
   logout,
@@ -24,7 +126,7 @@ const Navbar = ({
   lessinCart,
   clearCart,
   subTotal,
-}) => {
+}) {
   const ref = useRef();
   const [dropDown, setDropDown] = useState(false);
   const closeCart = () => {
@@ -34,77 +136,90 @@ const Navbar = ({
     ref.current.classList.remove("translate-x-full");
   };
 
+  const [open, setOpen] = useState(false);
   return (
-    <div>
-      <nav className="bg-gray-800">
-        <div className="flex flex-col md:flex-row md:justify-start justify-center items-center">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <Link href={"/"} className="flex flex-shrink-0 items-center ml-2">
-                <Image
-                  src={logo}
-                  width={200}
-                  height={100}
-                  alt="Developer's Wear"
-                />
-              </Link>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <Link
-                    href="/"
-                    className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Home
-                  </Link>
+    <nav className="flex filter drop-shadow-md bg-gray-800 px-4 py-4 h-20 items-center">
+      <MobileNav open={open} setOpen={setOpen} />
+      <div className="w-3/12 flex items-center">
+        <Link className="text-2xl font-semibold" href="/">
+          <Image src={logo} width={200} height={100} alt="Developer's Wear" />
+        </Link>
+      </div>
+      <div className="hidden md:flex flex-row">
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit  m-4 font-normal my-4"
+          href="/"
+        >
+          Home
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit mr-4 font-normal my-4"
+          href="/tshirts"
+        >
+          Tshirts
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit mr-4 font-normal my-4"
+          href="/mugs"
+        >
+          Mugs
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit mr-4 font-normal my-4"
+          href="/stickers"
+        >
+          Stickers
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit mr-4 font-normal my-4"
+          href="/hoodies"
+        >
+          Hoodies
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit mr-4 font-normal my-4"
+          href="/contact"
+        >
+          Contact
+        </Link>
+        <Link
+          className="text-xl hover:border-b hover:border-yellow-500 w-fit font-normal my-4"
+          href="/about"
+        >
+          About
+        </Link>
+      </div>
+      <div className="w-9/12 flex justify-end items-center">
+        <div
+          className="z-5 cursor-pointer flex relative w-8 h-8 flex-col justify-between items-center md:hidden"
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
+          {/* hamburger button */}
+          <span
+            className={`h-1 w-full bg-white rounded-lg transform transition duration-300 ease-in-out ${
+              open ? "rotate-45 translate-y-3.5" : ""
+            }`}
+          />
+          <span
+            className={`h-1 w-full bg-white rounded-lg transition-all duration-300 ease-in-out ${
+              open ? "w-0" : "w-full"
+            }`}
+          />
+          <span
+            className={`h-1 w-full bg-white rounded-lg transform transition duration-300 ease-in-out ${
+              open ? "-rotate-45 -translate-y-3.5" : ""
+            }`}
+          />
+        </div>
 
-                  <Link
-                    href="/tshirts"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    T-Shirts
-                  </Link>
-
-                  <Link
-                    href="/mugs"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Mugs
-                  </Link>
-
-                  <Link
-                    href="/stickers"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Stickers
-                  </Link>
-                  <Link
-                    href="/hoodies"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Hoodies
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Contact
-                  </Link>
-                  <Link
-                    href="/about"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    About
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div className=" md:flex justify-end">
           {user.value && (
             <Link
               href={""}
               // onClick={logout}
-              className="absolute right-16 text-3xl top-3 mr-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
+              className="absolute md:right-16 sm:right-28 md:text-3xl sm:text-5xl sm:top-3 md:top-5 mr-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
               onMouseEnter={() => {
                 setDropDown(true);
               }}
@@ -115,10 +230,18 @@ const Navbar = ({
               <MdAccountCircle />
             </Link>
           )}
+          {!user.value && (
+            <Link
+              href={"/login"}
+              className="absolute text-md md:right-16 sm:right-36  hover:text-blue-700   hover:bg-yellow-700 px-2 py-1 rounded bg-yellow-500 top-7"
+            >
+              Login
+            </Link>
+          )}
 
           {dropDown === true && user.value && (
             <ul
-              className="absolute right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32 "
+              className="absolute sm:right-28 md:right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32"
               onMouseEnter={() => {
                 setDropDown(true);
               }}
@@ -149,35 +272,27 @@ const Navbar = ({
               </Link>
             </ul>
           )}
-          {!user.value && (
-            <Link
-              href={"/login"}
-              className="absolute right-20 text-md hover:text-blue-700 top-4  hover:bg-yellow-700 p-1 rounded bg-yellow-500 py-1 px-2"
-            >
-              Login
-            </Link>
-          )}
+
           <Link
             href={"#"}
             onClick={openCart}
-            className="absolute right-0 flex top-3 mr-5  hover:bg-yellow-500 rounded"
+            className="absolute md:right-0 sm:right-12 flex md:top-5 sm:top-1 mr-5  hover:bg-yellow-500 rounded"
           >
-            <div className="font-sans block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 align-middle text-white text-xl p-1 pt-2">
-              
-                <MdShoppingCart className="text-3xl " />
-                {Object.keys(cart).length > 0 && (
-                  <span className="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
-                    {Object.keys(cart).length}
-                  </span>
-                )}
-              
+            <div className="block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 align-middle text-white text-xl p-1 pt-2">
+              <MdShoppingCart className="sm:text-4xl md:text-3xl " />
+              {Object.keys(cart).length > 0 && (
+                <span className="absolute right-0 sm:top-3 md:top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
+                  {Object.keys(cart).length}
+                </span>
+              )}
             </div>
           </Link>
         </div>
-      </nav>
+      </div>
+
       <section
         ref={ref}
-        className="cart z-10 absolute h-full shadow-2xl text-gray-900 top-0 right-0 bg-yellow-500 w-[300px] px-8 py-10 transform  transition-transform translate-x-full"
+        className="cart z-10 absolute h-screen shadow-2xl text-gray-900 top-0 right-0 bg-yellow-500 w-[300px] px-8 py-10 transform  transition-transform translate-x-full"
       >
         <div className="wrapper">
           <div
@@ -199,7 +314,6 @@ const Navbar = ({
                       className="flex w-[250px] justify-between items-center my-3 border-b p-1 border-gray-500"
                       key={item}
                     >
-                      <BsViewList />
                       <div className="flex flex-col items-center">
                         <h3>{cart[item].name}</h3>
                         <span>
@@ -253,8 +367,6 @@ const Navbar = ({
           </div>
         </div>
       </section>
-    </div>
+    </nav>
   );
-};
-
-export default Navbar;
+}

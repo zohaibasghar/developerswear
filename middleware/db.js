@@ -2,11 +2,16 @@ const mongoose = require("mongoose");
 const connectDB = (handler) => async (req, res) => {
   if (mongoose.connections[0].readyState) {
     console.log("mongo already connected");
-    mongoose.set("strictQuery", false);
+    mongoose.set("strictQuery", true);
     return handler(req, res);
   }
-  await mongoose.connect("mongodb+srv://zohaib:dVqrzGs1eC5YVCTl@cluster0.ozggqrs.mongodb.net/test");
+  await mongoose.connect(
+    // "mongodb+srv://zohaib:dVqrzGs1eC5YVCTl@cluster0.ozggqrs.mongodb.net/test"
+    "mongodb://localhost:27017"
+  );
+  mongoose.set("strictQuery", true);
   console.log("Mongo Connected");
+
   return handler(req, res);
 };
 

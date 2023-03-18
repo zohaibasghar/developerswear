@@ -10,15 +10,14 @@ async function handler(req, res) {
         { email },
         { password: 0, _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }
       );
-      let city,state;
-      console.log("pincode",user.pincode)
-      if(Object.keys(pincodes).includes(user.pincode)){
+      let city, state;
+
+      if (Object.keys(pincodes).includes(user.pincode.toString())) {
         city = await pincodes[user.pincode][0];
         state = await pincodes[user.pincode][1];
       }
-        
 
-      res.status(200).json({ user,city,state });
+      res.status(200).json({ user, city, state });
       if (err) {
         res.status(401).json({ err });
       }

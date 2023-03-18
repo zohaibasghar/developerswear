@@ -9,7 +9,7 @@ const userSchema = new Schema(
     phone:{String, default:""},
     pincode:{String, default:""},
   },
-  { timestamps: true, strict: false }
+  { timestamps: true }
 );
 
 

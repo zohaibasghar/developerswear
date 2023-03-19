@@ -46,7 +46,7 @@ function OrderPage({ order, orderProduct }) {
                   <div key={item} className="flex pb-2 mb-5">
                     <span className="text-white">
                       {item}
-                      {` (${products[item].size})`}
+                      {` (${products[item].size}/${products[item].color})`}
                     </span>
                     <span className="m-auto text-white">
                       {products[item].qty}

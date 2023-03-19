@@ -29,7 +29,7 @@ function MobileNav({ open, setOpen }) {
         open ? "-translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
     >
-      <div className="flex items-center justify-center filter drop-shadow-md bg-gray-800 h-20">
+      <div className="flex items-center justify-center filter drop-shadow-md py-3 bg-gray-800 ">
         {/*logo container*/}
         <Link className="text-xl font-semibold" href="/">
           <Image src={logo} width={200} height={100} alt="Developer's Wear" />
@@ -138,10 +138,10 @@ export default function Navbar({
 
   const [open, setOpen] = useState(false);
   return (
-    <nav className="flex filter drop-shadow-md bg-gray-800 px-4 py-4 h-20 items-center">
+    <nav className="flex filter drop-shadow-md bg-gray-800 px-4 py-1  items-center">
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-3/12 flex items-center">
-        <Link className="text-2xl font-semibold" href="/">
+        <Link className="text-2xl font-semibold py-2" href="/">
           <Image src={logo} width={200} height={100} alt="Developer's Wear" />
         </Link>
       </div>
@@ -191,7 +191,7 @@ export default function Navbar({
       </div>
       <div className="w-9/12 flex justify-end items-center">
         <div
-          className="z-5 cursor-pointer flex relative w-8 h-8 flex-col justify-between items-center md:hidden"
+          className="z-5 cursor-pointer flex relative w-8 h-7 flex-col justify-between items-center md:hidden"
           onClick={() => {
             setOpen(!open);
           }}
@@ -218,8 +218,7 @@ export default function Navbar({
           {user.value && (
             <Link
               href={""}
-              // onClick={logout}
-              className="absolute md:right-16 sm:right-28 md:text-3xl sm:text-5xl sm:top-3 md:top-5 mr-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
+              className="absolute md:right-16 sm:right-28 text-3xl sm:top-0 md:top-3 mr-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
               onMouseEnter={() => {
                 setDropDown(true);
               }}
@@ -233,7 +232,7 @@ export default function Navbar({
           {!user.value && (
             <Link
               href={"/login"}
-              className="absolute text-md md:right-16 sm:right-36  hover:text-blue-700   hover:bg-yellow-700 px-2 py-1 rounded bg-yellow-500 top-7"
+              className="absolute text-md md:right-16 sm:right-36  hover:text-blue-700   hover:bg-yellow-700 px-2 py-1 rounded bg-yellow-500 sm:top-1 md:top-5"
             >
               Login
             </Link>
@@ -241,7 +240,7 @@ export default function Navbar({
 
           {dropDown === true && user.value && (
             <ul
-              className="absolute sm:right-28 md:right-20 top-9 py-2 px-2 bg-yellow-500 rounded w-32"
+              className="absolute sm:right-28 md:right-20 md:top-8 sm:top-5 py-2 px-2 bg-yellow-500 rounded w-32"
               onMouseEnter={() => {
                 setDropDown(true);
               }}
@@ -276,12 +275,12 @@ export default function Navbar({
           <Link
             href={"#"}
             onClick={openCart}
-            className="absolute md:right-0 sm:right-12 flex md:top-5 sm:top-1 mr-5  hover:bg-yellow-500 rounded"
+            className="absolute md:right-0 sm:right-12 flex md:top-4 sm:-top-3 mr-5  hover:bg-yellow-500 rounded"
           >
-            <div className="block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 align-middle text-white text-xl p-1 pt-2">
-              <MdShoppingCart className="sm:text-4xl md:text-3xl " />
+            <div className="block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 align-middle text-white text-xl p-1">
+              <MdShoppingCart className="text-3xl " />
               {Object.keys(cart).length > 0 && (
-                <span className="absolute right-0 sm:top-3 md:top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
+                <span className="absolute right-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
                   {Object.keys(cart).length}
                 </span>
               )}

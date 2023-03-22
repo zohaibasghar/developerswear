@@ -314,6 +314,7 @@ export async function getServerSideProps(context) {
     await mongoose.connect("mongodb://127.0.0.1:27017/test");
   }
   let product = await Product.findOne({ slug: context.query.slug });
+  
   let variants = await Product.find({ title: product.title });
   let colorSizeSlug = {}; // {red: {xl: {slug: "Wear-the-code"}}}
   for (let item of variants) {

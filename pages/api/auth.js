@@ -4,7 +4,8 @@ import pincodes from "@/pincodes.json";
 const jwt = require("jsonwebtoken");
 async function handler(req, res) {
   if (req.method === "POST") {
-    jwt.verify(req.body.token, "key", async function (err, decoded) {
+    
+    jwt.verify(req.body.authToken, "key", async function (err, decoded) {
       let { email } = decoded;
       let user = await User.findOne(
         { email },

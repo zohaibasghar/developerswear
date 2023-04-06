@@ -6,8 +6,8 @@ const connectDB = (handler) => async (req, res) => {
     return handler(req, res);
   }
   await mongoose.connect(
-    "mongodb+srv://zohaib:dVqrzGs1eC5YVCTl@cluster0.ozggqrs.mongodb.net/test"
-    // "mongodb://localhost:27017"
+    // "mongodb+srv://zohaib:dVqrzGs1eC5YVCTl@cluster0.ozggqrs.mongodb.net/test"
+    "mongodb://127.0.0.1:27017"
   );
   mongoose.set("strictQuery", false);
   console.log("Mongo Connected");

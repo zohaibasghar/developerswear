@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
+import UserContextProvider from "@/Context/UserContext";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -13,7 +14,6 @@ export default function App({ Component, pageProps }) {
   const [subTotal, setSubTotal] = useState(0);
   const [key, setKey] = useState(0);
 
-  const [user, setUser] = useState({ value: null });
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     try {
@@ -34,11 +34,6 @@ export default function App({ Component, pageProps }) {
     } catch (error) {
       console.error(error);
       localStorage.clear();
-    }
-    let token = localStorage.getItem("auth-token");
-    if (token) {
-      setUser({ value: token });
-      setKey(Math.random());
     }
   }, [router.query]);
 
@@ -116,8 +111,6 @@ export default function App({ Component, pageProps }) {
   const logout = () => {
     router.push("/");
     localStorage.removeItem("auth-token");
-    setUser({ value: null });
-    setKey(Math.random());
     toast.info("Logout Successfully!");
   };
 
@@ -129,40 +122,39 @@ export default function App({ Component, pageProps }) {
         waitingTime={100}
         onLoaderFinished={() => setProgress(0)}
       />
-      <Navbar
-        user={user}
-        logout={logout}
-        skey={key}
-        cart={cart}
-        addtoCart={addtoCart}
-        lessinCart={lessinCart}
-        clearCart={clearCart}
-        subTotal={subTotal}
-      />
-      <ToastContainer
-        position="bottom-left"
-        autoClose={3000}
-        limit={2}
-        transition={Slide}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <Component
-        buyNow={buyNow}
-        cart={cart}
-        addtoCart={addtoCart}
-        lessinCart={lessinCart}
-        user={user}
-        clearCart={clearCart}
-        subTotal={subTotal}
-        {...pageProps}
-      />
+      <UserContextProvider>
+        <Navbar
+          logout={logout}
+          cart={cart}
+          addtoCart={addtoCart}
+          lessinCart={lessinCart}
+          clearCart={clearCart}
+          subTotal={subTotal}
+        />
+        <ToastContainer
+          position="bottom-left"
+          autoClose={3000}
+          limit={2}
+          transition={Slide}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <Component
+          buyNow={buyNow}
+          cart={cart}
+          addtoCart={addtoCart}
+          lessinCart={lessinCart}
+          clearCart={clearCart}
+          subTotal={subTotal}
+          {...pageProps}
+        />
+      </UserContextProvider>
       <Footer />
     </Fragment>
   );

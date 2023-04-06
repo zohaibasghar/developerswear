@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import logo from "public/logo-no-background.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,13 +14,7 @@ import {
   MdShoppingCart,
 } from "react-icons/md";
 import { toast } from "react-toastify";
-function NavLink({ to, children }) {
-  return (
-    <a href={to} className={`mx-4`}>
-      {children}
-    </a>
-  );
-}
+import { UserContext } from "@/Context/UserContext";
 
 function MobileNav({ open, setOpen }) {
   return (
@@ -120,8 +114,6 @@ function MobileNav({ open, setOpen }) {
 
 export default function Navbar({
   cart,
-  user,
-  logout,
   addtoCart,
   lessinCart,
   clearCart,
@@ -129,6 +121,7 @@ export default function Navbar({
 }) {
   const ref = useRef();
   const [dropDown, setDropDown] = useState(false);
+  const { user, logout } = useContext(UserContext);
   const closeCart = () => {
     ref.current.classList.add("translate-x-full");
   };
@@ -137,6 +130,7 @@ export default function Navbar({
   };
 
   const [open, setOpen] = useState(false);
+
   return (
     <nav className="flex filter drop-shadow-md bg-gray-800 px-4 py-1  items-center">
       <MobileNav open={open} setOpen={setOpen} />
@@ -215,7 +209,7 @@ export default function Navbar({
         </div>
 
         <div className=" md:flex justify-end">
-          {user.value && (
+          {user.token && (
             <Link
               href={""}
               className="absolute md:right-16 sm:right-28 text-3xl sm:top-0 md:top-3 mr-3 m-1 cursor-pointer rounded hover:bg-yellow-500 hover:text-blue-900 p-1"
@@ -229,7 +223,7 @@ export default function Navbar({
               <MdAccountCircle />
             </Link>
           )}
-          {!user.value && (
+          {!user.token && (
             <Link
               href={"/login"}
               className="absolute text-md md:right-16 sm:right-36  hover:text-blue-700   hover:bg-yellow-700 px-2 py-1 rounded bg-yellow-500 sm:top-1 md:top-5"
@@ -238,7 +232,7 @@ export default function Navbar({
             </Link>
           )}
 
-          {dropDown === true && user.value && (
+          {dropDown === true && user.token && (
             <ul
               className="absolute sm:right-28 md:right-20 md:top-8 sm:top-5 py-2 px-2 bg-yellow-500 rounded w-32"
               onMouseEnter={() => {

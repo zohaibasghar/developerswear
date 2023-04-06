@@ -1,7 +1,8 @@
+import { UserContext } from "@/Context/UserContext";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Login = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const Login = () => {
   const handleChange = (e) => {
     setLoginCred({ ...loginCred, [e.target.name]: e.target.value });
   };
+  const { setUser } = useContext(UserContext);
   useEffect(() => {
     if (localStorage.getItem("auth-token")) {
       router.push("/");
@@ -18,7 +20,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     let res = await fetch("api/login", {
       method: "POST",
       headers: {
@@ -27,9 +29,10 @@ const Login = () => {
       body: JSON.stringify(loginCred),
     });
     let data = await res.json();
-    setLoading(false)
+    setLoading(false);
     if (data.result) {
       localStorage.setItem("auth-token", data.token);
+      setUser({ token: data.token });
       setLoginCred({ email: "", password: "" });
       toast.success(`Happy Shopping ❤`);
       router.push("/");
@@ -103,7 +106,7 @@ const Login = () => {
               </div>
 
               <button className="text-white font-bold bg-yellow-500 border-0 my-3 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">
-                {loading?`Loading...`:`Login`}
+                {loading ? `Loading...` : `Login`}
               </button>
             </form>
             <Link

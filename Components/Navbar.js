@@ -15,6 +15,7 @@ import {
 } from "react-icons/md";
 import { toast } from "react-toastify";
 import { UserContext } from "@/Context/UserContext";
+import { CartContext } from "@/Context/cartContext";
 
 function MobileNav({ open, setOpen }) {
   return (
@@ -112,14 +113,9 @@ function MobileNav({ open, setOpen }) {
   );
 }
 
-export default function Navbar({
-  cart,
-  addtoCart,
-  lessinCart,
-  clearCart,
-  subTotal,
-}) {
+export default function Navbar() {
   const ref = useRef();
+  const {cart,addtoCart,lessinCart,clearCart,subTotal}=useContext(CartContext)
   const [dropDown, setDropDown] = useState(false);
   const { user, logout } = useContext(UserContext);
   const closeCart = () => {

@@ -1,55 +1,27 @@
+import { UserContext } from "@/Context/UserContext";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const MyAccount = () => {
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const router = useRouter();
-  const [userCred, setUserCred] = useState({
-    name: "",
-    email: "",
-    address: "",
-    phone: "",
-    pinCode: "",
-  });
-  const [email, setEmail] = useState("");
   const [passCred, setPassCred] = useState({
     oPass: "",
     nPass: "",
     cPass: "",
   });
-  let emailFetch = async (token) => {
-    let fet = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token }),
-    });
-    let data = await fet.json();
-    console.log(data);
-    const newstate = {
-      ...userCred,
-      name: data.user.name,
-      email: data.user.email,
-      phone: data.user.phone,
-      address: data.user.address,
-      pinCode: data.user.pincode,
-    };
-    setEmail(data.email);
-    setUserCred(newstate);
-  };
 
   useEffect(() => {
     if (!localStorage.getItem("auth-token")) {
       router.push("/");
-    } else {
-      emailFetch(localStorage.getItem("auth-token"));
     }
+
   }, []);
 
   const userCredChange = (e) => {
-    setUserCred({
-      ...userCred,
+    setUserInfo({
+      ...userInfo,
       [e.target.name]: e.target.value,
     });
   };
@@ -60,10 +32,20 @@ const MyAccount = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userCred),
+      body: JSON.stringify({
+        name: userInfo.name,
+        email:userInfo.email,
+        address: userInfo.address,
+        pinCode: userInfo.pinCode,
+        phone: userInfo.phone,
+      }),
     });
     let res = await req.json();
     if (res.success === true) {
+      setUserInfo({
+        ...userInfo,
+        [e.target.name]: e.target.value,
+      });
       toast.success("Successfully updated!");
     } else {
       toast.error("Error updating!");
@@ -109,7 +91,6 @@ const MyAccount = () => {
           name="description"
           content="the most affordable accessories for programmers and developer and coders"
         />
-
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -134,7 +115,7 @@ const MyAccount = () => {
                 name="name"
                 placeholder="User name"
                 onChange={userCredChange}
-                value={userCred.name}
+                value={userInfo.name}
               />
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -152,7 +133,7 @@ const MyAccount = () => {
                 name="email"
                 placeholder="User email"
                 onChange={userCredChange}
-                value={userCred.email}
+                value={userInfo.email}
               />
             </div>
             <div className="w-full  px-3 mb-6 md:mb-0">
@@ -169,7 +150,7 @@ const MyAccount = () => {
                 name="address"
                 placeholder="User address"
                 onChange={userCredChange}
-                value={userCred.address}
+                value={userInfo.address}
               />
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -186,7 +167,7 @@ const MyAccount = () => {
                 name="phone"
                 placeholder="User phone"
                 onChange={userCredChange}
-                value={userCred.phone}
+                value={userInfo.phone}
               />
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -203,7 +184,7 @@ const MyAccount = () => {
                 name="pinCode"
                 placeholder="User pinCode"
                 onChange={userCredChange}
-                value={userCred.pinCode}
+                value={userInfo.pinCode}
               />
             </div>
           </div>

@@ -3,116 +3,26 @@ import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
 import { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
 import UserContextProvider from "@/Context/UserContext";
+import CartContextProvider from "@/Context/cartContext";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [cart, setCart] = useState({});
-  const [subTotal, setSubTotal] = useState(0);
-  const [key, setKey] = useState(0);
-
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    try {
-      router.events.on("routeChangeStart", () => {
-        setProgress(30);
-      });
-      router.events.on("routeChangeComplete", () => {
-        setProgress(100);
-      });
-      router.events.on("routeChangeError", () => {
-        setProgress(10);
-      });
-
-      if (localStorage.getItem("cart")) {
-        setCart(JSON.parse(localStorage.getItem("cart")));
-        saveCart(JSON.parse(localStorage.getItem("cart")));
-      }
-    } catch (error) {
-      console.error(error);
-      localStorage.clear();
-    }
+    router.events.on("routeChangeStart", () => {
+      setProgress(30);
+    });
+    router.events.on("routeChangeComplete", () => {
+      setProgress(100);
+    });
+    router.events.on("routeChangeError", () => {
+      setProgress(10);
+    });
   }, [router.query]);
-
-  //cart saving function
-  const saveCart = (saveCart) => {
-    localStorage.setItem("cart", JSON.stringify(saveCart));
-    let subt = 0;
-    let keys = Object.keys(saveCart);
-    for (let i = 0; i < keys.length; i++) {
-      subt += saveCart[keys[i]].price * saveCart[keys[i]].qty;
-    }
-    setSubTotal(subt);
-  };
-
-  // add item to the cart
-  const addtoCart = (itemCode, qty, size, price, name, variant) => {
-    let newCart = { ...cart };
-
-    if (!(itemCode in cart)) {
-      newCart[itemCode] = { name, qty: 1, size, price, variant };
-      toast.success(`Item added successfully!`);
-    } else if (
-      newCart[itemCode].size !== size ||
-      newCart[itemCode].variant !== variant
-    ) {
-      // if the size or variant is different, create a new entry
-      newCart[`${itemCode}+${size}+${variant}`] = {
-        name,
-        qty: 1,
-        size,
-        price,
-        variant,
-      };
-      toast.success(`Item added successfully!`);
-    } else if (newCart[itemCode].size === size) {
-      // if the size is the same, update the quantity
-      newCart[itemCode].qty += qty;
-      toast.success(`Item quantity updated!`);
-    }
-
-    setCart(newCart);
-    saveCart(newCart);
-  };
-
-  // delete all items in cart
-  const clearCart = () => {
-    setCart({});
-    saveCart({});
-  };
-
-  // decrease the quantity in the cart
-  const lessinCart = (itemCode, qty) => {
-    let newCart = cart;
-    if (itemCode in cart) {
-      newCart[itemCode].qty = cart[itemCode].qty - qty;
-    }
-    if (cart[itemCode].qty <= 0) {
-      delete cart[itemCode];
-      toast.info(`Item removed from cart.`);
-    }
-    setCart(newCart);
-    saveCart(newCart);
-  };
-
-  // buy item right now and clear the remaining items from the cart
-  const buyNow = (itemCode, qty, size, price, name, variant) => {
-    let newCart = {};
-    newCart[itemCode] = { qty, size, price, name, variant };
-    setCart(newCart);
-    saveCart(newCart);
-    router.push("/checkout");
-  };
-
-  // user logout
-  const logout = () => {
-    router.push("/");
-    localStorage.removeItem("auth-token");
-    toast.info("Logout Successfully!");
-  };
 
   return (
     <Fragment>
@@ -122,38 +32,25 @@ export default function App({ Component, pageProps }) {
         waitingTime={100}
         onLoaderFinished={() => setProgress(0)}
       />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        limit={2}
+        transition={Slide}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <UserContextProvider>
-        <Navbar
-          logout={logout}
-          cart={cart}
-          addtoCart={addtoCart}
-          lessinCart={lessinCart}
-          clearCart={clearCart}
-          subTotal={subTotal}
-        />
-        <ToastContainer
-          position="bottom-left"
-          autoClose={3000}
-          limit={2}
-          transition={Slide}
-          hideProgressBar={false}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-        <Component
-          buyNow={buyNow}
-          cart={cart}
-          addtoCart={addtoCart}
-          lessinCart={lessinCart}
-          clearCart={clearCart}
-          subTotal={subTotal}
-          {...pageProps}
-        />
+        <CartContextProvider>
+          <Navbar />
+          <Component {...pageProps} />
+        </CartContextProvider>
       </UserContextProvider>
       <Footer />
     </Fragment>

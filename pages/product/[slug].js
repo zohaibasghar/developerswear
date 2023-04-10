@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import mongoose from "mongoose";
 import Product from "@/models/Product";
-function ProductPage({ addtoCart, product, variants, buyNow }) {
+import { CartContext } from "@/Context/cartContext";
+function ProductPage({product, variants }) {
+  const {addtoCart,buyNow}=useContext(CartContext)
   const router = useRouter();
   const { slug } = router.query;
   const userPin = useRef();

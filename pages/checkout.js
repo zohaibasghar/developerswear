@@ -8,15 +8,19 @@ import styles from "../styles/bank.module.css";
 import { toast } from "react-toastify";
 import Head from "next/head";
 import { UserContext } from "@/Context/UserContext";
-const Checkout = ({ cart, addtoCart, lessinCart, subTotal, clearCart }) => {
-  let [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
-  const [token, setToken] = useState("");
-  const [bank, setBank] = useState("");
+import { CartContext } from "@/Context/cartContext";
+
+const Checkout = () => {
+  const { cart, addtoCart, lessinCart, clearCart, subTotal } =
+    useContext(CartContext);
   const { userInfo, setUserInfo } = useContext(UserContext);
 
-  const [pinCodes, setPinCodes] = useState({});
+  const router = useRouter();
 
+  let [isOpen, setIsOpen] = useState(false);
+  const [token, setToken] = useState("");
+  const [bank, setBank] = useState("");
+  const [pinCodes, setPinCodes] = useState({});
   useEffect(() => {
     async function pinReq() {
       let pinReq = await fetch("/api/pincode", {

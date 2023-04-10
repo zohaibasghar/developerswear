@@ -12,7 +12,7 @@ async function handler(req, res) {
         phone: req.body.phone,
       }
     );
-    res.status(200).json({success:true});
+    res.status(200).json({ success: true });
   } else {
     res.status(400).json({ error: "Method not allowed!" });
   }

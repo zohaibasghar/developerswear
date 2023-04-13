@@ -31,15 +31,13 @@ async function handler(req, res) {
           return;
         }
       }
-      
+
       if (!Object.keys(pincodes).includes(req.body.checkOutCred.pinCode)) {
-        res
-          .status(501)
-          .json({
-            success: "serviceArea",
-            error:
-              "Sorry! Your area is not serviceable yet. stay tuned for updates.",
-          });
+        res.status(501).json({
+          success: "serviceArea",
+          error:
+            "Sorry! Your area is not serviceable yet. stay tuned for updates.",
+        });
         return;
       }
       //todo: check if the total bill is tempered or not [ done ]

@@ -4,8 +4,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import mongoose from "mongoose";
 import Product from "@/models/Product";
 import { CartContext } from "@/Context/cartContext";
-function ProductPage({product, variants }) {
-  const {addtoCart,buyNow}=useContext(CartContext)
+function ProductPage({ product, variants }) {
+  const { addtoCart, buyNow } = useContext(CartContext);
   const router = useRouter();
   const { slug } = router.query;
   const userPin = useRef();
@@ -43,6 +43,7 @@ function ProductPage({product, variants }) {
     let resImg = await newImg.json();
     setProductImg(resImg.img);
   };
+  console.log({size,color})
   return (
     product && (
       <div>
@@ -222,9 +223,7 @@ function ProductPage({product, variants }) {
                     {product.availableQty > 0 ? (
                       `\$${product.price}`
                     ) : (
-                      <div className="text-yellow-500 ">
-                        Out of stock!
-                      </div>
+                      <div className="text-yellow-500 ">Out of stock!</div>
                     )}
                   </span>
                   <button
@@ -316,7 +315,7 @@ export async function getServerSideProps(context) {
     await mongoose.connect("mongodb://127.0.0.1:27017/test");
   }
   let product = await Product.findOne({ slug: context.query.slug });
-  
+
   let variants = await Product.find({ title: product.title });
   let colorSizeSlug = {}; // {red: {xl: {slug: "Wear-the-code"}}}
   for (let item of variants) {

@@ -28,17 +28,29 @@ const CartContextProvider = (props) => {
     }
     setSubTotal(subt);
   };
+
   const addtoCart = (itemCode, qty, size, price, name, variant) => {
     let newCart = { ...cart };
-
     if (!(itemCode in cart)) {
       newCart[itemCode] = { name, qty: 1, size, price, variant };
       toast.success(`Item added successfully!`);
     } else {
-      newCart[itemCode].qty += qty;
-      toast.success(`Item quantity updated!`);
+      if (
+        size === newCart[itemCode].size ||
+        variant === newCart[itemCode].variant
+      ) {
+        newCart[`${itemCode}~${size}~${variant}`] = {
+          name,
+          qty: 1,
+          size,
+          price,
+          variant,
+        };
+        toast.success(`Item added successfully!`);
+      } else {
+        newCart[itemCode].qty += qty;
+      }
     }
-
     setCart(newCart);
     saveCart(newCart);
   };
